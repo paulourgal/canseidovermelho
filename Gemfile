@@ -33,7 +33,6 @@ gem "reek"
 group :development, :test do
   gem 'factory_girl_rails'
   gem 'guard-rspec'
-  gem 'rb-fsevent' if `uname` =~ /Darwin/
   gem 'rspec-rails'
   gem 'spring'
   gem 'spring-commands-rspec'

@@ -205,7 +205,6 @@ DEPENDENCIES
   pg
   rails (= 4.1.6)
   rails_best_practices
-  rb-fsevent
   reek
   rspec-rails
   sass-rails (~> 4.0.3)
