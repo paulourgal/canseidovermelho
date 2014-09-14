@@ -1,0 +1,13 @@
+language: ruby
+rvm:
+  - 2.1.1
+
+addons:
+  postgresql: "9.3"
+
+# whitelist
+branches:
+  only:
+    - master
+    - demo
+    - dev
