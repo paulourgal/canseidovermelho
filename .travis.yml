@@ -2,12 +2,19 @@ language: ruby
 rvm:
   - 2.1.1
 
-addons:
-  postgresql: "9.2"
-
 # whitelist
 branches:
   only:
     - master
     - demo
     - dev
+
+addons:
+  postgresql: "9.2"
+
+script:
+  - RAILS_ENV=test bundle exec rake --trace db:migrate test
+
+before_script:
+  - cp config/database.travis.yml config/database.yml
+  - psql -c 'create database canseidovermelho_test;' -U postgres

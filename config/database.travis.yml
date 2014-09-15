@@ -1,0 +1,4 @@
+test:
+  adapter: postgresql
+  database: canseidovermelho_test
+  username: postgres
