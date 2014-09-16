@@ -13,7 +13,7 @@ addons:
   postgresql: "9.2"
 
 script:
-  - RAILS_ENV=test bundle exec rake --trace db:migrate test
+  - RAILS_ENV=test bundle exec rake --trace db:migrate rspec
 
 before_script:
   - cp config/database.travis.yml config/database.yml
