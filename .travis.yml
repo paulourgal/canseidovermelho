@@ -9,6 +9,10 @@ branches:
     - demo
     - dev
 
+env:
+  RAILS_ENV=test
+  SECRET_KEY_BASE="$(bundle exec rake secret)"
+
 addons:
   postgresql: "9.2"
 
