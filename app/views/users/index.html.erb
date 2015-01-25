@@ -1,5 +1,5 @@
 Usuários
 
 <% @users.each do |user| %>
-  <p> user.email </P>
+  <p> <%= "Nome: #{user.name} - Email: #{user.email}" %> </P>
 <% end %>
