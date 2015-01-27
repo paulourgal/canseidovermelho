@@ -21,4 +21,5 @@ script:
 
 before_script:
   - cp config/database.travis.yml config/database.yml
+  - cp config/secrets.yml.sample config/secrets.yml
   - psql -c 'create database canseidovermelho_test;' -U postgres
