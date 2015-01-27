@@ -1,7 +1,11 @@
 class UsersController < ApplicationController
 
   def index
-    @users = User.all
+    if authenticated?
+      @users = User.all
+    else
+      redirect_to sign_up_path
+    end
   end
 
   def new

@@ -6,17 +6,28 @@ describe UsersController do
 
   context '#index' do
 
-    before(:each) do
-      create(:user)
-      get :index
+    context 'unauthenticated users' do
+
+      it 'redirect_to sign_up' do
+        get :index
+        expect(response).to redirect_to(sign_up_url)
+      end
+
     end
 
-    it 'redirect_to index template' do
-      expect(response).to render_template(:index)
-    end
+    context 'authenticated users' do
+      before(:each) do
+        sign_in(create_user_with_encrypted_password(:user))
+        get :index
+      end
 
-    it 'assigns @users' do
-      expect(assigns(:users)).to eq(User.all)
+      it 'redirect_to index template' do
+        expect(response).to render_template(:index)
+      end
+
+      it 'assigns @users' do
+        expect(assigns(:users)).to eq(User.all)
+      end
     end
 
   end

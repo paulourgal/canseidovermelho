@@ -2,11 +2,7 @@ require 'rails_helper'
 
 describe UserAuthenticator do
 
-  let(:user) do
-    user = build(:user)
-    UserCreator.call(user)
-    user
-  end
+  let(:user) { create_user_with_encrypted_password(:user) }
 
   it 'responds to call messagem' do
     expect(UserAuthenticator).to respond_to(:call)

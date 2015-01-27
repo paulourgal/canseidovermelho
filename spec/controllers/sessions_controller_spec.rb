@@ -21,8 +21,8 @@ describe SessionsController do
     end
 
     it 'redirects to root_url when user autheticates' do
-      UserCreator.call(build(:user))
-      post :create, email: "test@example.com", password: "s3cr37"
+      user = create_user_with_encrypted_password(:user)
+      post :create, email: user.email, password: user.password
       expect(response).to redirect_to(root_url)
     end
 
