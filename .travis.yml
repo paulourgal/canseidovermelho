@@ -14,12 +14,8 @@ branches:
 addons:
   postgresql: "9.2"
 
-env:
-  - RAILS_ENV=test
-  - SECRET_KEY_BASE="$(bundle exec rake secret)"
-
 script:
-  - RAILS_ENV=test bundle exec rake --trace db:migrate spec
+  - RAILS_ENV=test bundle exec rake --trace secret db:migrate spec
 
 before_script:
   - cp config/secrets.yml.sample config/secrets.yml
