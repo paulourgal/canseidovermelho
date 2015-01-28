@@ -6,7 +6,7 @@ FactoryGirl.define do
 
     name "Teste"
     birth_date Date.today
-    email "test@example.com"
+    sequence(:email) { |n| "test#{n}@example.com" }
     password "s3cr37"
     password_confirmation "s3cr37"
 
