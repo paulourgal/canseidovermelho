@@ -4,6 +4,10 @@ class Incoming < ActiveRecord::Base
 
   belongs_to :user
 
+  # validations
+
+  validates :user_id, presence: true
+
   # scopes
 
   def self.by_user(user)

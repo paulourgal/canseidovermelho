@@ -16,4 +16,16 @@ describe Incoming do
 
   end
 
+  context 'validates' do
+
+    context 'presence of' do
+
+      it 'user_id' do
+        expect(incoming).to validate_presence_of(:user_id)
+      end
+
+    end
+
+  end
+
 end

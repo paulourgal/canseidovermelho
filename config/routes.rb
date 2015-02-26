@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   resources :users
   resources :sessions
 
-  get 'incomings/index'
+  resources :incomings
 
   root :to => "incomings#index"
 

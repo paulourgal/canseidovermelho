@@ -10,7 +10,7 @@ class SessionsController < ApplicationController
       flash.now.notice = "Usuário logado"
       redirect_to root_url
     else
-      flash.now.alert = "Email ou senha incorreto"
+      flash.now.alert = "Email e/ou senha incorreto"
       render "new"
     end
   end

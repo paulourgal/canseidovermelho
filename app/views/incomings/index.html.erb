@@ -1,2 +1,13 @@
-<h1>Incomings#index</h1>
-<p>Find me in app/views/incomings/index.html.erb</p>
+<h1>Incomings</h1>
+
+<%= link_to 'Nova Entrada',  new_incoming_path %>
+
+<% if @incomings.blank? %>
+  <h3> Nenhuma entrada registra </h3>
+<% else %>
+  <% @incomings.each do |incoming| %>
+    <p>
+      <%= "Dia: #{incoming.day} / Tipo: #{incoming.kind} / Valor: #{incoming.value}" %>
+    </p>
+  <% end %>
+<% end %>
