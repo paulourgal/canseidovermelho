@@ -20,6 +20,7 @@ namespace :deploy do
   task :configure do
     on roles(:app) do
       execute :cp, "/canseidovermelho/app/config/database.yml", release_path.join('config/')
+      execute :cp, "/canseidovermelho/app/config/secrets.yml", release_path.join('config/')
       # execute :cp, "/canseidovermelho/app/config/newrelic.yml", release_path.join('config/')
     end
   end
