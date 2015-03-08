@@ -1,17 +1,14 @@
 class SessionsController < ApplicationController
 
-  def new
-  end
-
   def create
     user = UserAuthenticator.call(params[:email], params[:password])
     if user
       session[:user_id] = user.id
       flash.now.notice = "Usuário logado"
-      redirect_to root_url
+      redirect_to incomings_path
     else
       flash.now.alert = "Email e/ou senha incorreto"
-      render "new"
+      redirect_to root_url
     end
   end
 

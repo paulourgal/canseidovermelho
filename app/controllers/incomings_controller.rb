@@ -4,7 +4,7 @@ class IncomingsController < ApplicationController
     if authenticated?
       @incomings = Incoming.by_user(current_user)
     else
-      redirect_to log_in_path
+      redirect_to root_url
     end
   end
 
@@ -12,7 +12,7 @@ class IncomingsController < ApplicationController
     if authenticated?
       @incoming = Incoming.new
     else
-      redirect_to log_in_path
+      redirect_to root_url
     end
   end
 
@@ -27,7 +27,7 @@ class IncomingsController < ApplicationController
         render :new
       end
     else
-      redirect_to log_in_path
+      redirect_to root_url
     end
   end
 
