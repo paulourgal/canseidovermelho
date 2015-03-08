@@ -8,7 +8,7 @@ describe IncomingsController do
 
       it 'redirects to login' do
         get :index
-        expect(response).to redirect_to(log_in_path)
+        expect(response).to redirect_to(root_url)
       end
 
     end
@@ -44,7 +44,7 @@ describe IncomingsController do
 
       it 'redirects to login' do
         get :new
-        expect(response).to redirect_to(log_in_path)
+        expect(response).to redirect_to(root_url)
       end
 
     end
@@ -78,7 +78,7 @@ describe IncomingsController do
       it 'redirects to login' do
         post :create,
           incoming: { day: Date.today, kind: 1, value: 100, user_id: 1 }
-        expect(response).to redirect_to(log_in_path)
+        expect(response).to redirect_to(root_url)
       end
 
     end

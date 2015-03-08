@@ -2,17 +2,6 @@ require 'rails_helper'
 
 describe SessionsController do
 
-  render_views
-
-  context '#new' do
-
-    it 'render template new' do
-      get :new
-      expect(response).to render_template(:new)
-    end
-
-  end
-
   context '#create' do
 
     it 'sends call to UserAuthenticator' do
@@ -20,15 +9,15 @@ describe SessionsController do
       post :create, email: "test@example.com", password: "s3cr37"
     end
 
-    it 'redirects to root_url when user autheticates' do
+    it 'redirects to incomings_path when user autheticates' do
       user = create_user_with_encrypted_password(:user)
       post :create, email: user.email, password: user.password
-      expect(response).to redirect_to(root_url)
+      expect(response).to redirect_to(incomings_path)
     end
 
-    it 'renders new when user not autheticate' do
+    it 'redirects to root_url when user not autheticate' do
       post :create, email: "test@example.com", password: "s3cr37"
-      expect(response).to render_template(:new)
+      expect(response).to redirect_to(root_url)
     end
 
   end

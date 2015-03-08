@@ -13,6 +13,4 @@
  *= require_self
  *= require bootstrap
  *= require base/base
- *= require modules/login
- *= require_tree ./views
  */

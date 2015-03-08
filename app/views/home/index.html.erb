@@ -1,0 +1,40 @@
+<% content_for :stylesheet, stylesheet_link_tag("views/home") %>
+
+<div class="login">
+
+    <h1 class="login-title">Can$ei do <span class="red">Vermelho<span></h1>
+
+    <%= form_tag sessions_path, class: 'login-form' do %>
+
+      <div class="row login-fields">
+        <div class="col-md-6">
+          <p><%= label_tag :email, t('.email') %></p>
+          <p>
+            <%= text_field_tag :email, nil, class: 'login-field', placeholder: t('.placeholder.email') %>
+          </p>
+        </div>
+        <div class="col-md-6">
+          <p>
+            <%= label_tag :password, t('.password') %>
+            <%= "(#{t('.forgot_password')})" %>
+          </p>
+          <p>
+            <%= password_field_tag :password, nil, class: 'login-field', placeholder: t('.placeholder.password') %>
+          </p>
+        </div>
+      </div>
+
+      <div class="row login-commands">
+        <div class="col-md-6">
+          <%= link_to t('.sign_up'), sign_up_path %>
+        </div>
+        <div class="col-md-6">
+          <%= submit_tag t('.login'), class: 'pull-right' %>
+        </div>
+      </div>
+
+    <% end %>
+
+  </div>
+
+</div>

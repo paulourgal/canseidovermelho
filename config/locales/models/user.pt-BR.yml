@@ -1,0 +1,7 @@
+pt-BR:
+  models:
+    user:
+      birth_date: "Data de nascimento"
+      email: "E-mail"
+      name: "Nome"
+      password: "Senha"

@@ -1,0 +1,12 @@
+pt-BR:
+  home:
+    index:
+      email: E-mail
+      forgot_password: Esqueceu a senha?
+      login: Entrar
+      name: Nome
+      password: Senha
+      placeholder:
+        email: Digite seu e-mail
+        password: Digite sua senha
+      sign_up: Cadastrar Novo Usuário
