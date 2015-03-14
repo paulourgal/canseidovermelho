@@ -2,19 +2,19 @@ body {
   background: none repeat scroll 0% 0% #FBFBFB;
 }
 
-.login {
+.new-user {
   background-color: #FFFFFF;
   border: 1px solid #CCC;
   box-shadow: 0 0 5px 1px #ccc;
   left: 50%;
   margin-left: -250px;
+  margin-top: 25px;
   padding: 20px;
-  position: fixed;
-  top: 20%;
+  position: relative;
   width: 500px;
 }
 
-.login-title {
+.new-user-title {
   border-bottom: 1px solid #ccc;
   font-size: 40px;
   font-weight: 200;
@@ -22,15 +22,11 @@ body {
   text-align: center;
 }
 
-.login-title .red {
-  color: red;
+.new-user-subtitle {
+  font-weight: 400;
 }
 
-#flash_alert {
-  margin-top: 20px;
-}
-
-.login-form {
+.new_user {
   margin-top: 20px;
 }
 
@@ -38,10 +34,6 @@ body {
   margin-bottom: 10px;
 }
 
-.login-field {
+.new-user-field {
   width: 100%;
-}
-
-.login-commands {
-  margin-top: 10px;
 }

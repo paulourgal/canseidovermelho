@@ -7,7 +7,6 @@ class User < ActiveRecord::Base
   attr_accessor :password
 
   # validations
-  validates :birth_date, presence: true
   validates :confirmed, inclusion: [false, true]
   validates :email, presence: true, uniqueness: true, email: true
   validates :name, presence: true

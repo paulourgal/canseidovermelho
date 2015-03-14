@@ -16,10 +16,10 @@ class UsersController < ApplicationController
     @user = User.new(user_param)
 
     if UserCreator.call(@user)
-      flash.now.notice = "Usuário criado com sucesso."
+      flash.now.notice = "Usuário cadastrado com sucesso."
       redirect_to action: :index
     else
-      flash.now.alert = "Erro ao criar usuário."
+      flash.now.alert = "Falha ao cadastrar novo usuário."
       render :new
     end
   end

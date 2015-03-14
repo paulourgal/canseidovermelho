@@ -1,32 +1,80 @@
-<h1>Cadastre-se<h1>
+<% content_for :stylesheet, stylesheet_link_tag("views/users/new") %>
 
-<%= form_for @user do |f| %>
+<div class="new-user">
 
-  <p>
-    <%= f.label :name %>
-    <%= f.text_field :name %>
-  </p>
+  <h1 class="new-user-title">Can$ei do <span class="red">Vermelho<span></h1>
 
-  <p>
-    <%= f.label :email %>
-    <%= f.text_field :email %>
-  </p>
+  <h2 class="new-user-subtitle">Cadastrar Novo Usuário</h2>
 
-  <p>
-    <%= f.label :password %>
-    <%= f.text_field :password %>
-  </p>
+  <% flash.each do |name, msg| %>
+    <%= content_tag :div, msg, :id => "flash_#{name}" %>
+  <% end %>
 
-  <p>
-    <%= f.label :password_confirmation %>
-    <%= f.text_field :password_confirmation %>
-  </p>
+  <%= form_for @user do |f| %>
 
-  <p>
-    <%= f.label :birth_date %>
-    <%= f.text_field :birth_date %>
-  </p>
+    <%= f.hidden_field :confirmed, value: false %>
+    <%= f.hidden_field :role, value: User::ROLES.index(:user) %>
 
-  <p><%= f.submit "Cadastrar" %></p>
+    <div class="row">
+      <div class="col-md-12">
+        <%= f.label :name %>
+      </div>
+    </div>
 
-<% end %>
+    <div class="row">
+      <div class="col-md-12 field">
+        <%= f.text_field :name, class: "new-user-field", autofocus: true %>
+        <%= render 'shared/error_message', resource: @user, attribute: :name %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12">
+        <%= f.label :email %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12 field">
+        <%= f.text_field :email, class: "new-user-field" %>
+        <%= render 'shared/error_message', resource: @user, attribute: :email %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12">
+        <%= f.label :password %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12 field">
+        <%= f.text_field :password, type: 'password', class: "new-user-field" %>
+        <%= render 'shared/error_message', resource: @user, attribute: :password %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12">
+        <%= f.label :password_confirmation %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12 field">
+        <%= f.text_field :password_confirmation, type: 'password', class: "new-user-field" %>
+        <%= render 'shared/error_message', resource: @user, attribute: :password_confirmation %>
+      </div>
+    </div>
+
+    <div class="row new-user-commands">
+      <div class="col-md-6">
+        <%= link_to t('.cancel'), root_url %>
+      </div>
+      <div class="col-md-6">
+        <%= f.submit t('.create'), class: 'pull-right' %>
+      </div>
+    </div>
+
+  <% end %>
+</div>

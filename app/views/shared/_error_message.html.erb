@@ -1,0 +1,9 @@
+<% if resource.errors[attribute] %>
+  <div class='alert alert-danger alert-form'>
+    <ul>
+      <% resource.errors[attribute].each do |error| %>
+        <li><span><%= error %></span></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>

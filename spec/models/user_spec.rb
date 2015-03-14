@@ -12,7 +12,7 @@ describe User do
 
     context 'presence of' do
 
-      [:birth_date, :email, :name, :role].each do |attr_sym|
+      [:email, :name, :role].each do |attr_sym|
         it attr_sym do
           expect(user).to validate_presence_of(attr_sym)
         end

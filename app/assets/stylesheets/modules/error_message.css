@@ -1,0 +1,23 @@
+/* Flash */
+#flash_alert {
+  color: red;
+}
+
+#flash_notice {
+  color: blue;
+}
+
+#flash_success {
+  color: green;
+}
+
+/* Form error message */
+.alert {
+}
+
+.alert-form {
+}
+
+.alert-danger {
+  color: red;
+}

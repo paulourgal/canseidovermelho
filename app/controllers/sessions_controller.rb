@@ -7,14 +7,13 @@ class SessionsController < ApplicationController
       flash.now.notice = "Usuário logado"
       redirect_to incomings_path
     else
-      flash.now.alert = "Email e/ou senha incorreto"
-      redirect_to root_url
+      redirect_to root_url, alert: "Email e/ou senha incorreto"
     end
   end
 
   def destroy
     session[:user_id] = nil
-    redirect_to root_url, :notice => "Logged out!"
+    redirect_to root_url
   end
 
 end
