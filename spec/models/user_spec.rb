@@ -12,7 +12,7 @@ describe User do
 
     context 'presence of' do
 
-      [:email, :name, :birth_date].each do |attr_sym|
+      [:birth_date, :email, :name, :role].each do |attr_sym|
         it attr_sym do
           expect(user).to validate_presence_of(attr_sym)
         end
@@ -34,6 +34,26 @@ describe User do
 
     it 'uniqueness of email' do
       expect(user).to validate_uniqueness_of(:email)
+    end
+
+    context 'format of email' do
+
+      it 'paulo@example must be invalid' do
+        user.email = "paulo@example"
+        user.valid?
+        expect(user.errors[:email].size).to be > 0
+      end
+
+      it 'paulo@example.com must be valid' do
+        user.email = "paulo@example.com"
+        user.valid?
+        expect(user.errors[:email].size).to eq(0)
+      end
+
+    end
+
+    it 'confirmed included in [false, true]' do
+      expect(user).to validate_inclusion_of(:confirmed).in_array([true, false])
     end
   end
 

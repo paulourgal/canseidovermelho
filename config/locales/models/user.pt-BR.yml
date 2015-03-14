@@ -5,3 +5,22 @@ pt-BR:
       email: "E-mail"
       name: "Nome"
       password: "Senha"
+      role: "Papel"
+      roles:
+        admin: Administrador
+        user: Usuário
+
+  errors:
+    models:
+      user:
+      attributes:
+        email:
+          blank: "E-mail deve ser preenchido"
+          taken: "E-mail indisponível"
+          invalid: "E-mail inválido"
+        name:
+          blank: "Nome deve ser preenchido"
+        password:
+          blank: "Senha deve ser preenchida"
+        role:
+          blank: "Papel deve ser preenchida"
