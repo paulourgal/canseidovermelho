@@ -1,0 +1,47 @@
+<% content_for :stylesheet, stylesheet_link_tag("views/password_resets/new") %>
+
+<div class="password-reset">
+
+  <h1 class="password-reset-title">Can$ei do <span class="red">Vermelho<span></h1>
+
+  <% flash.each do |name, msg| %>
+    <%= content_tag :div, msg, :id => "flash_#{name}" %>
+  <% end %>
+
+  <% if @user.nil? %>
+
+    <div class="row password-reset-commands">
+      <div class="col-md-12">
+        <%= link_to t('.back'), root_url, class: 'pull-right' %>
+      </div>
+    </div>
+
+  <% else %>
+
+    <%= form_for @user, url: password_reset_path(params[:id]), class: 'password-reset-form' do |f| %>
+
+      <div class="row">
+        <div class="col-md-12 field">
+          <%= f.label :password %>
+          <%= f.password_field :password, class: 'password-reset-field', autofocus: true %>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-12 field">
+          <%= f.label :password_confirmation %>
+          <%= f.password_field :password_confirmation, class: 'password-reset-field' %>
+        </div>
+      </div>
+
+      <div class="row password-reset-commands">
+        <div class="col-md-12">
+          <%= f.submit t('.update'), class: 'pull-right' %>
+        </div>
+      </div>
+    <% end %>
+
+  <% end %>
+
+
+</div>

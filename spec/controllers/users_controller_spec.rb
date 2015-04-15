@@ -17,7 +17,8 @@ describe UsersController do
 
     context 'authenticated users' do
       before(:each) do
-        sign_in(create_user_with_encrypted_password(:user))
+        user = create_user_with_encrypted_password(:user)
+        sign_in(user)
         get :index
       end
 
@@ -36,7 +37,7 @@ describe UsersController do
 
     before(:each) { get :new }
 
-    it 'redirect_to new template' do
+    it 'renders new template' do
       expect(response).to render_template(:new)
     end
 
@@ -53,13 +54,32 @@ describe UsersController do
     end
 
     it 'redirect_to new when UserCreator.call returns true' do
+      userCreate = double(UserCreator)
+      userCreate.stub(:call).with(anything()) { true }
       post :create, user: attributes_for(:user)
-      expect(response).to redirect_to(action: :index)
+      expect(response).to redirect_to(root_url)
     end
 
     it 'render new when UserCreator.call returns false' do
       post :create, user: attributes_for(:user, :invalid)
       expect(response).to render_template(:new)
+    end
+
+  end
+
+  context '#confirmation' do
+
+    let(:user) { create(:user) }
+
+    it 'must confirmed user' do
+      get :confirmation, id: user
+      user.reload
+      expect(user.confirmed).to be_truthy
+    end
+
+    it 'must redirect to root_url' do
+      get :confirmation, id: user
+      expect(response).to redirect_to(root_url)
     end
 
   end

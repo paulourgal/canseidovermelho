@@ -1,0 +1,39 @@
+body {
+  background: none repeat scroll 0% 0% #FBFBFB;
+}
+
+.password-reset {
+  background-color: #FFFFFF;
+  border: 1px solid #CCC;
+  box-shadow: 0 0 5px 1px #ccc;
+  left: 50%;
+  margin-left: -250px;
+  margin-top: 200px;
+  padding: 20px;
+  position: relative;
+  width: 500px;
+}
+
+.password-reset-title {
+  border-bottom: 1px solid #ccc;
+  font-size: 40px;
+  font-weight: 200;
+  margin: 0px;
+  text-align: center;
+}
+
+.password-reset-subtitle {
+  font-weight: 400;
+}
+
+.password-reset-form {
+  margin-top: 20px;
+}
+
+.field {
+  margin-bottom: 10px;
+}
+
+.password-reset-field {
+  width: 100%;
+}

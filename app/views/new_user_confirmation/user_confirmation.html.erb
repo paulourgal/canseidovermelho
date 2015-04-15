@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h3>Bem vindo(a) ao Cansei do Vermelho, <%= @user.name %></h3>
+    <p>
+      Sua cadastro na plataforma foi realizado com sucesso.
+    </p>
+    <p>
+      Para confirmar o cadastro você precisa clicar no link abaixo.
+    </p>
+    <%= confirmation_url(id: @user) %>
+  </body>
+</html>

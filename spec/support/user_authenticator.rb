@@ -1,8 +1,7 @@
-
 def sign_in(user)
-  user = UserAuthenticator.call(user.email, user.password)
+  result = UserAuthenticator.call(user.email, user.password)
 
-  if user
-    session[:user_id] = user.id
+  if result[:error].blank?
+    cookies[:auth_token] = result[:user].auth_token
   end
 end

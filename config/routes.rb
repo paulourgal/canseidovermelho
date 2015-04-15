@@ -1,12 +1,14 @@
 Rails.application.routes.draw do
 
-  root :to => "home#index"
-
-  get "sign_up" => "users#new", :as => "sign_up"
   delete "log_out" => "sessions#destroy", :as => "log_out"
 
-  resources :users
-  resources :sessions
-  resources :incomings
+  get "confirmation" => "users#confirmation", :as => "confirmation"
+  get "sign_up" => "users#new", :as => "sign_up"
 
+  resources :incomings
+  resources :password_resets
+  resources :sessions
+  resources :users
+
+  root :to => "home#index"
 end

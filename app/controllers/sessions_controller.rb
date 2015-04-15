@@ -1,18 +1,18 @@
 class SessionsController < ApplicationController
 
   def create
-    user = UserAuthenticator.call(params[:email], params[:password])
-    if user
-      session[:user_id] = user.id
+    result = UserAuthenticator.call(params[:email], params[:password])
+    if result[:error].blank?
+      cookies[:auth_token] = result[:user].auth_token
       flash.now.notice = "Usuário logado"
       redirect_to incomings_path
     else
-      redirect_to root_url, alert: "Email e/ou senha incorreto"
+      redirect_to root_url, alert: result[:error]
     end
   end
 
   def destroy
-    session[:user_id] = nil
+    cookies.delete(:auth_token)
     redirect_to root_url
   end
 

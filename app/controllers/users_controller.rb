@@ -16,12 +16,19 @@ class UsersController < ApplicationController
     @user = User.new(user_param)
 
     if UserCreator.call(@user)
-      flash.now.notice = "Usuário cadastrado com sucesso."
-      redirect_to action: :index
+      flash.notice = "Usuário cadastrado com sucesso."
+      redirect_to root_url
     else
       flash.now.alert = "Falha ao cadastrar novo usuário."
       render :new
     end
+  end
+
+  # FIXME: action confirmation with VERB GET
+  def confirmation
+    @user = User.find(params[:id])
+    @user.confirmed!
+    redirect_to root_url
   end
 
   private

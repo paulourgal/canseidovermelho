@@ -5,6 +5,12 @@ describe UserCreator do
   let(:invalid_user) { build(:user, :invalid) }
   let(:user)         { build(:user) }
 
+  before(:each) do
+    @confirmation_mailer = double(NewUserConfirmation)
+    NewUserConfirmation.stub(:user_confirmation) { @confirmation_mailer }
+    @confirmation_mailer.stub(:deliver)
+  end
+
   it 'responds to call message' do
     expect(UserCreator).to respond_to(:call)
   end
@@ -28,10 +34,15 @@ describe UserCreator do
       expect(UserCreator.call(user)).to be_truthy
     end
 
-    it 'creates a user when is valid' do
+    it 'creates a user' do
       expect do
         UserCreator.call(user)
       end.to change(User, :count).by(1)
+    end
+
+    it 'sends a confirmation email to user' do
+      expect(@confirmation_mailer).to receive(:deliver)
+      UserCreator.call(user)
     end
 
   end

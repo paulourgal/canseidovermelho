@@ -8,16 +8,31 @@ describe UserAuthenticator do
     expect(UserAuthenticator).to respond_to(:call)
   end
 
-  it 'returns nil when user not authenticate' do
-    email = user.email
-    password = "invalid"
-    expect(UserAuthenticator.call(email, password)).to be_nil
-  end
+  context 'returns' do
+    it '{ user: nil, error: E-mail inváliado } when e-mail is INVALID' do
+      email = "INVALID"
+      password = "INVALID"
+      expect(UserAuthenticator.call(email, password)).to eq({ user: nil, error: "E-mail não cadastrado"})
+    end
 
-  it 'returns user when user authenticates' do
-    email = user.email
-    password = "s3cr37"
-    expect(UserAuthenticator.call(email, password)).to eq(user)
+    it '{ user: user, error: Usuário não confirmou e-mail } when confirmed is false' do
+      user = create(:user)
+      email = user.email
+      password = "s3cr37"
+      expect(UserAuthenticator.call(email, password)).to eq({ user: user, error: "Usuário não confirmou e-mail" })
+    end
+
+    it '{ user: user, error: Senha incorreta } when password is incorrect' do
+      email = user.email
+      password = "INVALID"
+      expect(UserAuthenticator.call(email, password)).to eq({ user: user, error: "Senha incorreta" })
+    end
+
+    it '{ user: user, error: } when user authenticates' do
+      email = user.email
+      password = "s3cr37"
+      expect(UserAuthenticator.call(email, password)).to eq({ user: user, error: "" })
+    end
   end
 
 end

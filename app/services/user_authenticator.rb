@@ -13,11 +13,17 @@ class UserAuthenticator
 
   def call
     user = User.find_by_email(email)
-    if user && password_check(user)
-      user
+
+    if user.nil?
+      { user: nil, error: "E-mail não cadastrado" }
+    elsif !user.confirmed?
+      { user: user, error: "Usuário não confirmou e-mail" }
+    elsif !password_check(user)
+      { user: user, error: "Senha incorreta" }
     else
-      nil
+      { user: user, error: "" }
     end
+
   end
 
   private

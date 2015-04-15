@@ -23,8 +23,11 @@
       </div>
 
       <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-6">
           <%= label_tag :password, t('.password') %>
+        </div>
+        <div class="col-md-6">
+          <%= link_to "esqueceu a senha?", new_password_reset_path, class: 'pull-right' %>
         </div>
       </div>
 

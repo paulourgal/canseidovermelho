@@ -15,4 +15,11 @@ class User < ActiveRecord::Base
   validates :password_confirmation, presence: true, on: :create
   validates :role, presence: true
 
+  # methods
+
+  def confirmed!
+    self.confirmed = true
+    self.save!
+  end
+
 end

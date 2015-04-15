@@ -6,6 +6,7 @@ pt-BR:
         email: "E-mail"
         name: "Nome"
         password: "Senha"
+        password_confirmation: "Confirmação de senha"
         role: "Papel"
         roles:
           admin: Administrador
