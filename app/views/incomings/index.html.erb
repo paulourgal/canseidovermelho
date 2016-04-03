@@ -1,2 +1,47 @@
-<h1>Em desenvolvimento ...</h1>
+<div class="row">
+  <div class="col-md-12">
+    <%= link_to "Nova entrada", new_incoming_path, class: 'pull-right' %>
+  </div>
+</div>
 
+<div class="row">
+  <div class="col-md-12">
+
+    <ul class="list">
+
+      <li class="list-header">
+        <div class="row">
+          <div class="col-md-4">
+            <%= "Dia" %>
+          </div>
+          <div class="col-md-4">
+            <%= "Categoria" %>
+          </div>
+          <div class="col-md-4">
+            <%= "Valor" %>
+          </div>
+        </div>
+      </li>
+
+      <% @incomings.each do |incoming| %>
+
+        <li class="list-item">
+          <div class="row">
+            <div class="col-md-4">
+              <%= l(incoming.day) %>
+            </div>
+            <div class="col-md-4">
+              <%= Incoming::kind_str(incoming.kind) %>
+            </div>
+            <div class="col-md-4">
+              <%= "R$#{number_with_precision(incoming.value.to_f, precision: 2)}" %>
+            </div>
+          </div>
+        </li>
+
+      <% end %>
+
+    </ul>
+
+  </div>
+</div>

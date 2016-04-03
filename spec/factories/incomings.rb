@@ -2,9 +2,9 @@
 
 FactoryGirl.define do
   factory :incoming do
-    kind 1
+    kind :salary
     day "2015-01-27"
-    value ""
+    value "100"
     user
   end
 end

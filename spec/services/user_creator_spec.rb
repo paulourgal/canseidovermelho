@@ -7,8 +7,9 @@ describe UserCreator do
 
   before(:each) do
     @confirmation_mailer = double(NewUserConfirmation)
-    NewUserConfirmation.stub(:user_confirmation) { @confirmation_mailer }
-    @confirmation_mailer.stub(:deliver)
+    allow(NewUserConfirmation).to receive(:user_confirmation)
+      .and_return(@confirmation_mailer)
+    allow(@confirmation_mailer).to receive(:deliver)
   end
 
   it 'responds to call message' do

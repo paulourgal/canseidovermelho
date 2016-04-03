@@ -1,20 +1,16 @@
-body {
-  background: none repeat scroll 0% 0% #FBFBFB;
-}
-
-.password-reset {
+.form-container {
   background-color: #FFFFFF;
   border: 1px solid #CCC;
   box-shadow: 0 0 5px 1px #ccc;
   left: 50%;
   margin-left: -250px;
-  margin-top: 200px;
+  margin-top: 10%;
   padding: 20px;
   position: relative;
   width: 500px;
 }
 
-.password-reset-title {
+.form-title {
   border-bottom: 1px solid #ccc;
   font-size: 40px;
   font-weight: 200;
@@ -22,18 +18,18 @@ body {
   text-align: center;
 }
 
-.password-reset-subtitle {
+.form-subtitle {
   font-weight: 400;
 }
 
-.password-reset-form {
+.form {
   margin-top: 20px;
 }
 
-.field {
+.form .field {
   margin-bottom: 10px;
 }
 
-.password-reset-field {
+.form .form-field {
   width: 100%;
 }

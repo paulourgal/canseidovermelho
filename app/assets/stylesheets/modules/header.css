@@ -1,0 +1,41 @@
+#header {
+  background: white;
+  border-bottom: 1px solid #ccc;
+  height: 80px;
+}
+
+#header .logo {
+  margin-top: 10px;
+}
+
+#header .logout {
+  margin-top: 5px;
+}
+
+#header .nav {
+  margin-top: 25px;
+}
+
+#header .nav ul {
+  display: inline;
+  list-style: none;
+}
+
+#header .nav li {
+  display: inline;
+  font-size: 20px;
+  font-weight: 200;
+  margin-left: 20px;
+}
+
+#header .nav a {
+  display: inline;
+  color: black;
+}
+
+#header .nav a:hover {
+}
+
+#header .nav a.active {
+  cursor: default;
+}

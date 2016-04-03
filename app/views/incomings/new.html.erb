@@ -1,24 +1,63 @@
-<h1>Nova Entrada<h1>
+<div class="form-container">
 
-<%= form_for @incoming do |f| %>
+  <h1 class="form-title">Nova Entrada</h2>
 
-  <p>
-    <%= f.label :day %>
-    <%= f.text_field :day %>
-  </p>
+  <% flash.each do |name, msg| %>
+    <%= content_tag :div, msg, :id => "flash_#{name}" %>
+  <% end %>
 
-  <p>
-    <%= f.label :kind %>
-    <%= f.text_field :kind %>
-  </p>
-
-  <p>
-    <%= f.label :value %>
-    <%= f.text_field :value %>
-  </p>
+  <%= form_for @incoming, html: { class: 'form' } do |f| %>
 
   <%= f.hidden_field :user_id, value: current_user.id %>
 
-  <p><%= f.submit "Gravar" %></p>
+    <div class="row">
+      <div class="col-md-12">
+        <%= f.label :kind %>
+      </div>
+    </div>
 
-<% end %>
+    <div class="row">
+      <div class="col-md-12 field">
+        <%= f.select :kind, options_for_select(Incoming::kinds.collect { |k, _| [Incoming.kind_str(k), k] }, @incoming.kind), { include_blank: t('helpers.select.prompt') }, { class: 'form-field' } %>
+        <%= render 'shared/error_message', resource: @incoming, attribute: :kind %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12">
+        <%= f.label :day %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12 field">
+        <%= f.text_field :day, class: "form-field datepicker" %>
+        <%= render 'shared/error_message', resource: @incoming, attribute: :day %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12">
+        <%= f.label :value %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12 field">
+        <%= f.text_field :value, class: "form-field money-field" %>
+        <%= render 'shared/error_message', resource: @incoming, attribute: :value %>
+      </div>
+    </div>
+
+    <div class="row form-commands">
+      <div class="col-md-6">
+        <%= link_to t('.cancel'), incomings_url %>
+      </div>
+      <div class="col-md-6">
+        <%= f.submit t('.create'), class: 'pull-right' %>
+      </div>
+    </div>
+
+  <% end %>
+
+</div>

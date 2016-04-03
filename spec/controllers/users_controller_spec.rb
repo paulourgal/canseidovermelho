@@ -55,7 +55,7 @@ describe UsersController do
 
     it 'redirect_to new when UserCreator.call returns true' do
       userCreate = double(UserCreator)
-      userCreate.stub(:call).with(anything()) { true }
+      allow(userCreate).to receive(:call).with(anything()).and_return(true)
       post :create, user: attributes_for(:user)
       expect(response).to redirect_to(root_url)
     end

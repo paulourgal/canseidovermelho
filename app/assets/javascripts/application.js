@@ -12,4 +12,28 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require jquery-ui/datepicker
+//= require jquery.maskedinput
+//= require jquery.maskMoney
 //= require_tree .
+
+$(function() {
+  $( ".datepicker" ).datepicker({
+    dateFormat: "dd/mm/yy",
+    monthNamesShort: [ "Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago",
+      "Set", "Out", "Nov", "Dez" ],
+    dayNamesMin: [ "Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab" ],
+    changeMonth: true,
+    changeYear: true
+  });
+
+  $(".money-field").maskMoney({
+    showSymbol: true,
+    symbol: 'R$ ',
+    symbolStay: true,
+    decimal:',',
+    thousands:'.'
+  });
+
+  $('.datepicker').mask('99/99/9999');
+});

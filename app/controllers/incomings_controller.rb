@@ -1,33 +1,21 @@
-class IncomingsController < ApplicationController
+class IncomingsController < PlatformController
 
   def index
-    if authenticated?
-      @incomings = Incoming.by_user(current_user)
-    else
-      redirect_to root_url
-    end
+    @incomings = Incoming.by_user(current_user)
   end
 
   def new
-    if authenticated?
-      @incoming = Incoming.new
-    else
-      redirect_to root_url
-    end
+    @incoming = Incoming.new
   end
 
   def create
-    if authenticated?
-      @incoming = Incoming.new(incoming_params)
-      if @incoming.save
-        flash.now.notice = "Entrada criada com sucesso."
-        redirect_to action: :index
-      else
-        flash.now.alert = "Falha ao criar entrada."
-        render :new
-      end
+    @incoming = Incoming.new(incoming_params)
+    if @incoming.save
+      flash.now.notice = "Entrada criada com sucesso."
+      redirect_to action: :index
     else
-      redirect_to root_url
+      flash.now.alert = "Falha ao criar entrada."
+      render :new
     end
   end
 

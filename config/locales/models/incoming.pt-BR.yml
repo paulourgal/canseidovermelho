@@ -1,0 +1,22 @@
+pt-BR:
+  activerecord:
+    attributes:
+      incoming:
+        day: "Dia"
+        kind: "Categoria"
+        value: "Valor (R$)"
+        kinds:
+          salary: "Salário"
+          investiment: "Investimento"
+          other: "Outro"
+
+  errors:
+    models:
+      incoming:
+        attributes:
+          day:
+            blank: "Dia deve ser preenchido"
+          kind:
+            blank: "Categoria deve ser preenchida"
+          value:
+            blank: "Valor deve ser preenchido"

@@ -9,12 +9,32 @@
 </head>
 <body>
 
-<div id="user_nav">
-  <% if current_user %>
-    Logged in as <%= current_user.email %>.
-    <%= link_to 'Log out',  log_out_path,  method: :delete %>
-  <% end %>
-</div>
+<% if current_user %>
+  <header id="header" class="container">
+    <div class="row">
+
+      <div class="col-md-4">
+        <h1 class="logo pull-left">Can$ei do
+          <span class="red">Vermelho<span>
+        </h1>
+      </div>
+
+      <div class="col-md-8">
+        <div class="nav pull-right">
+          <ul>
+            <li>
+              <%= link_to "Entradas", incomings_path %>
+            </li>
+            <li>
+              <%= link_to('Sair', log_out_path, method: :delete) %>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </header>
+<% end %>
 
 <div class="container">
   <%= yield %>

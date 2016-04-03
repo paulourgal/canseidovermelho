@@ -32,8 +32,9 @@ describe PasswordResetter do
 
     it 'sends a confirmation email to user' do
       @instruction_mailer = double(UserPasswordReset)
-      UserPasswordReset.stub(:password_reset) { @instruction_mailer }
-      @instruction_mailer.stub(:deliver)
+      allow(UserPasswordReset).to receive(:password_reset)
+        .and_return(@instruction_mailer)
+      allow(@instruction_mailer).to receive(:deliver)
       expect(@instruction_mailer).to receive(:deliver)
       PasswordResetter.call(user.email)
     end
