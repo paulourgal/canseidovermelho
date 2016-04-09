@@ -1,0 +1,5 @@
+pt-BR:
+  outgoings:
+    new:
+      cancel: Cancelar
+      create: Cadastrar

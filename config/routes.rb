@@ -5,7 +5,8 @@ Rails.application.routes.draw do
   get "confirmation" => "users#confirmation", :as => "confirmation"
   get "sign_up" => "users#new", :as => "sign_up"
 
-  resources :incomings
+  resources :incomings, only: [:index, :new, :create]
+  resources :outgoings, only: [:index, :new, :create]
   resources :password_resets
   resources :sessions
   resources :users

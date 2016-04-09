@@ -1,0 +1,63 @@
+<div class="form-container">
+
+  <h1 class="form-title">Nova Saída</h2>
+
+  <% flash.each do |name, msg| %>
+    <%= content_tag :div, msg, :id => "flash_#{name}" %>
+  <% end %>
+
+  <%= form_for @outgoing, html: { class: 'form' } do |f| %>
+
+  <%= f.hidden_field :user_id, value: current_user.id %>
+
+    <div class="row">
+      <div class="col-md-12">
+        <%= f.label :kind %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12 field">
+        <%= f.select :kind, options_for_select(Outgoing::kinds.collect { |k, _| [Outgoing.kind_str(k), k] }, @outgoing.kind), { include_blank: t('helpers.select.prompt') }, { class: 'form-field' } %>
+        <%= render 'shared/error_message', resource: @outgoing, attribute: :kind %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12">
+        <%= f.label :day %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12 field">
+        <%= f.text_field :day, class: "form-field datepicker" %>
+        <%= render 'shared/error_message', resource: @outgoing, attribute: :day %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12">
+        <%= f.label :value %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12 field">
+        <%= f.text_field :value, class: "form-field money-field" %>
+        <%= render 'shared/error_message', resource: @outgoing, attribute: :value %>
+      </div>
+    </div>
+
+    <div class="row form-commands">
+      <div class="col-md-6">
+        <%= link_to t('.cancel'), outgoings_url %>
+      </div>
+      <div class="col-md-6">
+        <%= f.submit t('.create'), class: 'pull-right' %>
+      </div>
+    </div>
+
+  <% end %>
+
+</div>

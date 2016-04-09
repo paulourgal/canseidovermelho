@@ -1,0 +1,47 @@
+<div class="row">
+  <div class="col-md-12">
+    <%= link_to "Nova saída", new_outgoing_path, class: 'pull-right' %>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+
+    <ul class="list">
+
+      <li class="list-header">
+        <div class="row">
+          <div class="col-md-4">
+            <%= "Dia" %>
+          </div>
+          <div class="col-md-4">
+            <%= "Categoria" %>
+          </div>
+          <div class="col-md-4">
+            <%= "Valor" %>
+          </div>
+        </div>
+      </li>
+
+      <% @outgoings.each do |outgoing| %>
+
+        <li class="list-item">
+          <div class="row">
+            <div class="col-md-4">
+              <%= l(outgoing.day) %>
+            </div>
+            <div class="col-md-4">
+              <%= Outgoing::kind_str(outgoing.kind) %>
+            </div>
+            <div class="col-md-4">
+              <%= "R$#{number_with_precision(outgoing.value.to_f, precision: 2)}" %>
+            </div>
+          </div>
+        </li>
+
+      <% end %>
+
+    </ul>
+
+  </div>
+</div>

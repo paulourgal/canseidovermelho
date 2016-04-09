@@ -1,0 +1,24 @@
+pt-BR:
+  activerecord:
+    attributes:
+      outgoing:
+        day: "Dia"
+        descripting: "Descrição"
+        kind: "Categoria"
+        value: "Valor (R$)"
+        kinds:
+          feeding: "Alimentação"
+          car: "Carro"
+          rent: "Aluguel"
+          other: "Outro"
+
+  errors:
+    models:
+      outgoing:
+        attributes:
+          day:
+            blank: "Dia deve ser preenchido"
+          kind:
+            blank: "Categoria deve ser preenchida"
+          value:
+            blank: "Valor deve ser preenchido"
