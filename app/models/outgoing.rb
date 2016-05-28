@@ -2,7 +2,12 @@ class Outgoing < ActiveRecord::Base
 
   # assossiations
 
+  belongs_to :category
   belongs_to :user
+
+  # delegations
+
+  delegate :name, to: :category, prefix: true
 
   # enums
 
@@ -10,8 +15,8 @@ class Outgoing < ActiveRecord::Base
 
   # validations
 
+  validates :category_id, presence: true
   validates :day, presence: true
-  validates :kind, presence: true
   validates :user_id, presence: true
   validates :value, presence: true
 
@@ -19,14 +24,6 @@ class Outgoing < ActiveRecord::Base
 
   def self.by_user(user)
     where(user: user)
-  end
-
-  def self.kind_str(kind)
-    if kinds.include?(kind)
-      I18n.t("activerecord.attributes.outgoing.kinds.#{kind}")
-    else
-      I18n.t(:undefined)
-    end
   end
 
 

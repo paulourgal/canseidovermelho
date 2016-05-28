@@ -10,8 +10,20 @@ describe Outgoing do
 
   context 'belongs_to' do
 
+    it 'category' do
+      expect(outgoing).to belong_to(:category)
+    end
+
     it 'user' do
       expect(outgoing).to belong_to(:user)
+    end
+
+  end
+
+  context 'delegations' do
+
+    it 'name to category with prefix' do
+      expect(outgoing).to respond_to(:category_name)
     end
 
   end
@@ -20,12 +32,12 @@ describe Outgoing do
 
     context 'presence of' do
 
-      it 'day' do
-        expect(outgoing).to validate_presence_of(:day)
+      it 'category_id' do
+        expect(outgoing).to validate_presence_of(:category_id)
       end
 
-      it 'kind' do
-        expect(outgoing).to validate_presence_of(:kind)
+      it 'day' do
+        expect(outgoing).to validate_presence_of(:day)
       end
 
       it 'user_id' do

@@ -2,7 +2,7 @@
 
 FactoryGirl.define do
   factory :outgoing do
-    kind :feeding
+    category
     day "2015-01-27"
     value "100"
     user

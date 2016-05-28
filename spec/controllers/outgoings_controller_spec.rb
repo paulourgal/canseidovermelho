@@ -79,6 +79,7 @@ describe OutgoingsController do
         before(:each) do
           @user = create_user_with_encrypted_password(:user)
           sign_in(@user)
+          @categories = create_list(:category, 2, user: @user, kind: :outgoing)
           get :new
         end
 
@@ -90,6 +91,12 @@ describe OutgoingsController do
 
         it 'assigns outgoing' do
           expect(assigns(:outgoing)).to be_a_new(Outgoing)
+        end
+
+        it 'assigns categories for user' do
+          create(:category, user: @user, kind: :incoming)
+          create(:category, kind: :outgoing)
+          expect(assigns(:categories)).to match_array(@categories)
         end
 
       end
@@ -104,7 +111,7 @@ describe OutgoingsController do
 
       it 'redirects to login' do
         post :create,
-          outgoing: { day: Date.today, kind: :feeding, value: 100, user_id: 1 }
+          outgoing: { day: Date.today, value: 100, user_id: 1 }
         expect(response).to redirect_to(root_url)
       end
 
@@ -115,6 +122,7 @@ describe OutgoingsController do
       before(:each) do
         @user = create_user_with_encrypted_password(:user)
         sign_in(@user)
+        @category = create(:category, user: @user)
       end
 
       render_views
@@ -124,62 +132,40 @@ describe OutgoingsController do
         it 'creates a Outgoing' do
           expect do
             post :create, outgoing: {
-              day: Date.today, kind: :feeding, value: 100, user_id: @user
+              category_id: @category, day: Date.today, value: 100, user_id: @user
             }
           end.to change(Outgoing, :count).by(1)
         end
 
         it 'redirects to :index' do
           post :create, outgoing: {
-            day: Date.today, kind: :feeding, value: 100, user_id: @user
+            category_id: @category, day: Date.today, value: 100, user_id: @user
           }
           expect(response).to redirect_to(action: :index)
         end
 
       end
 
-      context 'fails when' do
+      context 'and fails' do
 
-        it 'user is not present' do
+        it 'does not create an Outgoing' do
           expect do
             post :create, outgoing: {
-              day: Date.today, kind: :feeding, value: 100, user_id: nil
+              day: Date.today, value: 100, user_id: nil
             }
           end.to change(Outgoing, :count).by(0)
         end
 
-        it 'day is not present' do
-          expect do
-            post :create, outgoing: {
-              day: nil, kind: :feeding, value: 100, user_id: @user
-            }
-          end.to change(Outgoing, :count).by(0)
-        end
 
-        it 'kind is not present' do
-          expect do
-            post :create, outgoing: {
-              day: Date.today, kind: nil, value: 100, user_id: @user
-            }
-          end.to change(Outgoing, :count).by(0)
-        end
-
-        it 'value is not present' do
-          expect do
-            post :create, outgoing: {
-              day: Date.today, kind: :feeding, value: nil, user_id: @user
-            }
-          end.to change(Outgoing, :count).by(0)
+        it 'render template new when fails' do
+          post :create, outgoing: {
+            day: Date.today, value: 100, user_id: nil
+          }
+          expect(response).to render_template(:new)
         end
 
       end
 
-      it 'render template new when fails' do
-        post :create, outgoing: {
-          day: Date.today, kind: :feeding, value: 100, user_id: nil
-        }
-        expect(response).to render_template(:new)
-      end
 
     end
 

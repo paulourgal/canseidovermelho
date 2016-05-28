@@ -20,6 +20,14 @@ describe Incoming do
 
   end
 
+  context 'delegations' do
+
+    it 'name to category with prefix' do
+      expect(incoming).to respond_to(:category_name)
+    end
+
+  end
+
   context 'validates' do
 
     context 'presence of' do

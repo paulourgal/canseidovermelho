@@ -6,6 +6,7 @@ class OutgoingsController < PlatformController
 
   def new
     @outgoing = Outgoing.new
+    @categories = categories_for_user
   end
 
   def create
@@ -15,14 +16,19 @@ class OutgoingsController < PlatformController
       redirect_to action: :index
     else
       flash.now.alert = "Falha ao criar saída."
+      @categories = categories_for_user
       render :new
     end
   end
 
   private
 
+  def categories_for_user
+    Category.by_user_and_kind(current_user, Category.kinds[:outgoing])
+  end
+
   def outgoing_params
-    params.require(:outgoing).permit(:id, :day, :kind, :value, :user_id)
+    params.require(:outgoing).permit(:id, :category_id, :day, :value, :user_id)
   end
 
 end
