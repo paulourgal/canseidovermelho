@@ -1,0 +1,20 @@
+pt-BR:
+  activerecord:
+    attributes:
+      category:
+        kind: Tipo da Categoria
+        kinds:
+          incoming: "Entrada"
+          outgoing: "Saída"
+        name: "Nome"
+
+  errors:
+    models:
+      category:
+        attributes:
+          Kind:
+            blank: "O tipo da categoria deve ser preenchido"
+          name:
+            blank: "O nome da categoria deve ser preenchido"
+          user_id:
+            blank: "A categoria deve estar associada a um usuário"

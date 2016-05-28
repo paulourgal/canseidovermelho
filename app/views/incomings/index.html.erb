@@ -31,7 +31,7 @@
               <%= l(incoming.day) %>
             </div>
             <div class="col-md-4">
-              <%= Incoming::kind_str(incoming.kind) %>
+              <%= incoming.category_name %>
             </div>
             <div class="col-md-4">
               <%= "R$#{number_with_precision(incoming.value.to_f, precision: 2)}" %>

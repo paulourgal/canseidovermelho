@@ -76,6 +76,7 @@ describe IncomingsController do
       before(:each) do
         @user = create_user_with_encrypted_password(:user)
         sign_in(@user)
+        @categories = create_list(:category, 2, user: @user, kind: :incoming)
         get :new
       end
 
@@ -87,6 +88,12 @@ describe IncomingsController do
 
       it 'assigns incoming' do
         expect(assigns(:incoming)).to be_a_new(Incoming)
+      end
+
+      it 'assigns categories for user' do
+        create(:category, user: @user, kind: :outgoing)
+        create(:category, kind: :incoming)
+        expect(assigns(:categories)).to match_array(@categories)
       end
 
     end
@@ -110,70 +117,43 @@ describe IncomingsController do
       before(:each) do
         @user = create_user_with_encrypted_password(:user)
         sign_in(@user)
+        @category = create(:category, user: @user)
       end
 
       render_views
 
       context 'and success' do
 
-        it 'creates a Incoming' do
+        it 'creates an Incoming' do
           expect do
             post :create, incoming: {
-              day: Date.today, kind: :salary, value: 100, user_id: @user
+              category_id: @category, day: Date.today, value: 100, user_id: @user
             }
           end.to change(Incoming, :count).by(1)
         end
 
         it 'redirects to :index' do
           post :create, incoming: {
-            day: Date.today, kind: :salary, value: 100, user_id: @user
+            category_id: @category, day: Date.today, value: 100, user_id: @user
           }
           expect(response).to redirect_to(action: :index)
         end
 
       end
 
-      context 'fails when' do
+      context 'and fails' do
 
-        it 'user is not present' do
+        it 'does not create an Incoming' do
           expect do
-            post :create, incoming: {
-              day: Date.today, kind: :salary, value: 100, user_id: nil
-            }
+            post :create, incoming: { user_id: nil }
           end.to change(Incoming, :count).by(0)
         end
 
-        it 'day is not present' do
-          expect do
-            post :create, incoming: {
-              day: nil, kind: :salary, value: 100, user_id: @user
-            }
-          end.to change(Incoming, :count).by(0)
+        it 'render template new when fails' do
+          post :create, incoming: { user_id: nil }
+          expect(response).to render_template(:new)
         end
 
-        it 'kind is not present' do
-          expect do
-            post :create, incoming: {
-              day: Date.today, kind: nil, value: 100, user_id: @user
-            }
-          end.to change(Incoming, :count).by(0)
-        end
-
-        it 'value is not present' do
-          expect do
-            post :create, incoming: {
-              day: Date.today, kind: :salary, value: nil, user_id: @user
-            }
-          end.to change(Incoming, :count).by(0)
-        end
-
-      end
-
-      it 'render template new when fails' do
-        post :create, incoming: {
-          day: Date.today, kind: :salary, value: 100, user_id: nil
-        }
-        expect(response).to render_template(:new)
       end
 
     end

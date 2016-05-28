@@ -2,16 +2,17 @@ class Incoming < ActiveRecord::Base
 
   # associations
 
+  belongs_to :category
   belongs_to :user
 
-  # enums
+  # delegations
 
-  enum kind: [ :salary, :investiment, :other ]
+  delegate :name, to: :category, prefix: true
 
   # validations
 
+  validates :category_id, presence: true
   validates :day, presence: true
-  validates :kind, presence: true
   validates :user_id, presence: true
   validates :value, presence: true
 
@@ -20,15 +21,6 @@ class Incoming < ActiveRecord::Base
   def self.by_user(user)
     where(user: user)
   end
-
-  def self.kind_str(kind)
-    if kinds.include?(kind)
-      I18n.t("activerecord.attributes.incoming.kinds.#{kind}")
-    else
-      I18n.t(:undefined)
-    end
-  end
-
 
   def value=(money)
     unmasked = unmask_currency(money) if money.present?

@@ -10,6 +10,10 @@ describe Incoming do
 
   context 'belongs_to' do
 
+    it 'category' do
+      expect(incoming).to belong_to(:category)
+    end
+
     it 'user' do
       expect(incoming).to belong_to(:user)
     end
@@ -20,12 +24,12 @@ describe Incoming do
 
     context 'presence of' do
 
-      it 'day' do
-        expect(incoming).to validate_presence_of(:day)
+      it 'category_id' do
+        expect(incoming).to validate_presence_of(:category_id)
       end
 
-      it 'kind' do
-        expect(incoming).to validate_presence_of(:kind)
+      it 'day' do
+        expect(incoming).to validate_presence_of(:day)
       end
 
       it 'user_id' do

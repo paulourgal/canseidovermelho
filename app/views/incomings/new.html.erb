@@ -12,14 +12,14 @@
 
     <div class="row">
       <div class="col-md-12">
-        <%= f.label :kind %>
+        <%= f.label :category_id %>
       </div>
     </div>
 
     <div class="row">
       <div class="col-md-12 field">
-        <%= f.select :kind, options_for_select(Incoming::kinds.collect { |k, _| [Incoming.kind_str(k), k] }, @incoming.kind), { include_blank: t('helpers.select.prompt') }, { class: 'form-field' } %>
-        <%= render 'shared/error_message', resource: @incoming, attribute: :kind %>
+        <%= f.select :category_id, options_for_select(@categories.collect { |category| [category.name, category.id] }, @incoming.category_id), { include_blank: t('helpers.select.prompt') }, { class: 'form-field' } %>
+        <%= render 'shared/error_message', resource: @incoming, attribute: :category_id %>
       </div>
     </div>
 
