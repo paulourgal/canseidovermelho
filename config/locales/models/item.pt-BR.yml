@@ -1,0 +1,15 @@
+pt-BR:
+  activerecord:
+    attributes:
+      item:
+        day: "Dia"
+        value: "Valor (R$)"
+
+  errors:
+    models:
+      item:
+        attributes:
+          day:
+            blank: "Dia deve ser preenchido"
+          value:
+            blank: "Valor deve ser preenchido"

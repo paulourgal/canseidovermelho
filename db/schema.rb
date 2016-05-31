@@ -11,20 +11,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160528105242) do
+ActiveRecord::Schema.define(version: 20160531095045) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "categories", force: true do |t|
+  create_table "categories", force: :cascade do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "user_id"
-    t.string   "name"
+    t.string   "name",       limit: 255
     t.integer  "kind"
   end
 
-  create_table "incomings", force: true do |t|
+  create_table "incomings", force: :cascade do |t|
     t.date     "day"
     t.decimal  "value"
     t.integer  "user_id"
@@ -33,28 +33,34 @@ ActiveRecord::Schema.define(version: 20160528105242) do
     t.integer  "category_id"
   end
 
-  create_table "outgoings", force: true do |t|
+  create_table "items", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer  "user_id"
+  end
+
+  create_table "outgoings", force: :cascade do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "user_id"
     t.date     "day"
     t.decimal  "value"
-    t.string   "description"
+    t.string   "description", limit: 255
     t.integer  "category_id"
   end
 
-  create_table "users", force: true do |t|
-    t.string   "name"
+  create_table "users", force: :cascade do |t|
+    t.string   "name",                   limit: 255
     t.date     "birth_date"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "email",                  null: false
-    t.string   "password_salt"
-    t.string   "password_hash"
+    t.string   "email",                  limit: 255, null: false
+    t.string   "password_salt",          limit: 255
+    t.string   "password_hash",          limit: 255
     t.integer  "role"
     t.boolean  "confirmed"
-    t.string   "auth_token"
-    t.string   "password_reset_token"
+    t.string   "auth_token",             limit: 255
+    t.string   "password_reset_token",   limit: 255
     t.datetime "password_reset_sent_at"
   end
 

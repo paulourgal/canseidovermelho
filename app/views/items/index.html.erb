@@ -1,0 +1,35 @@
+<div class="row">
+  <div class="col-md-12">
+    <%= link_to "Novo item", new_item_path, class: 'pull-right' %>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+
+    <ul class="list">
+
+      <li class="list-header">
+        <div class="row">
+          <div class="col-md-4">
+            <%= "Nome" %>
+          </div>
+        </div>
+      </li>
+
+      <% @items.each do |item| %>
+
+        <li class="list-item">
+          <div class="row">
+            <div class="col-md-4">
+              <%= item.id %>
+            </div>
+          </div>
+        </li>
+
+      <% end %>
+
+    </ul>
+
+  </div>
+</div>
