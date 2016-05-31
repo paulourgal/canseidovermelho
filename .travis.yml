@@ -2,7 +2,7 @@ language: ruby
 cache: bundler
 bundler_args: --without guard --deployment
 rvm:
-  - 2.2.4
+  - 2.1.1
 
 # whitelist
 branches:
