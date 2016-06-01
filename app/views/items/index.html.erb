@@ -11,8 +11,17 @@
 
       <li class="list-header">
         <div class="row">
-          <div class="col-md-4">
+          <div class="col-md-3">
+            <%= "Situação" %>
+          </div>
+          <div class="col-md-3">
             <%= "Nome" %>
+          </div>
+          <div class="col-md-3">
+            <%= "Preço de Custo" %>
+          </div>
+          <div class="col-md-3">
+            <%= "Preço de Venda" %>
           </div>
         </div>
       </li>
@@ -21,8 +30,17 @@
 
         <li class="list-item">
           <div class="row">
-            <div class="col-md-4">
-              <%= item.id %>
+            <div class="col-md-3">
+              <%= Item.status_str(item.status) %>
+            </div>
+            <div class="col-md-3">
+              <%= item.name %>
+            </div>
+            <div class="col-md-3">
+              <%= "R$#{number_with_precision(item.cost_price.to_f, precision: 2)}" %>
+            </div>
+            <div class="col-md-3">
+              <%= "R$#{number_with_precision(item.unitary_price.to_f, precision: 2)}" %>
             </div>
           </div>
         </li>

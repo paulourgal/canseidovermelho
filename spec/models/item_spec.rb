@@ -18,6 +18,26 @@ describe Item do
 
   context 'validates' do
 
+    it 'presence of cost_price' do
+      expect(item).to validate_presence_of(:cost_price)
+    end
+
+    it 'presence of name' do
+      expect(item).to validate_presence_of(:name)
+    end
+
+    it 'presence of quantity' do
+      expect(item).to validate_presence_of(:quantity)
+    end
+
+    it 'presence of status' do
+      expect(item).to validate_presence_of(:status)
+    end
+
+    it 'presence of unitary_price' do
+      expect(item).to validate_presence_of(:unitary_price)
+    end
+
     it 'presence of user_id' do
       expect(item).to validate_presence_of(:user_id)
     end

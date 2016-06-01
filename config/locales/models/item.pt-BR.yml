@@ -2,14 +2,29 @@ pt-BR:
   activerecord:
     attributes:
       item:
-        day: "Dia"
-        value: "Valor (R$)"
+        cost_price: "Preço de Custo"
+        description: "Descrição"
+        name: "Nome do Item"
+        quantity: "Quantidade Disponível"
+        status: "Situação"
+        statuses:
+          available: "Disponível"
+          unavailable: "Indisponível"
+        unitary_price: "Preço Unitário"
 
   errors:
     models:
       item:
         attributes:
-          day:
-            blank: "Dia deve ser preenchido"
-          value:
-            blank: "Valor deve ser preenchido"
+          cost_price:
+            blank: "Preço de Custo deve ser preenchido"
+          name:
+            blank: "Nome do Item deve ser preenchido"
+          quantity:
+            blank: "Quantidade Disponível deve ser preenchido"
+          status:
+            blank: "Situação deve ser preenchida"
+          unitary_price:
+            blank: "Preço Unitário deve ser preenchido"
+          user_id:
+            blank: "Usuário deve ser definido"

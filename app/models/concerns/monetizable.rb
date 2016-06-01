@@ -1,11 +1,6 @@
 module Monetizable
   extend ActiveSupport::Concern
 
-  def value=(money)
-    unmasked = unmask_currency(money) if money.present?
-    self[:value] = unmasked
-  end
-
   protected
 
   def unmask_currency(money)

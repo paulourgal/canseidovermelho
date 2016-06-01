@@ -22,7 +22,8 @@ class ItemsController < PlatformController
   private
 
   def item_params
-    params.require(:item).permit(:id, :user_id)
+    params.require(:item)
+      .permit(:id, :cost_price, :description, :name, :quantity, :status, :unitary_price, :user_id)
   end
 
 end

@@ -10,6 +10,71 @@
 
     <%= f.hidden_field :user_id, value: current_user.id %>
 
+    <div class="row">
+      <div class="col-md-4">
+        <%= f.label :status %>
+      </div>
+
+      <div class="col-md-8">
+        <%= f.label :name %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-4 field">
+        <%= f.select :status, options_for_select(Item.statuses.collect { |status| [Item.status_str(status[0]), status[0]] }, @item.status), { include_blank: t('helpers.select.prompt') }, { class: 'form-field' } %>
+        <%= render 'shared/error_message', resource: @item, attribute: :status %>
+      </div>
+
+      <div class="col-md-8 field">
+        <%= f.text_field :name, class: "form-field" %>
+        <%= render 'shared/error_message', resource: @item, attribute: :name %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-4">
+        <%= f.label :cost_price %>
+      </div>
+
+      <div class="col-md-4">
+        <%= f.label :unitary_price %>
+      </div>
+
+      <div class="col-md-4">
+        <%= f.label :quantity %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-4 field">
+        <%= f.text_field :cost_price, class: "form-field money-field" %>
+        <%= render 'shared/error_message', resource: @item, attribute: :cost_price %>
+      </div>
+
+      <div class="col-md-4 field">
+        <%= f.text_field :unitary_price, class: "form-field money-field" %>
+        <%= render 'shared/error_message', resource: @item, attribute: :unitary_price %>
+      </div>
+
+      <div class="col-md-4 field">
+        <%= f.text_field :quantity, class: "form-field" %>
+        <%= render 'shared/error_message', resource: @item, attribute: :quantity %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12">
+        <%= f.label :description %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12 field">
+        <%= f.text_area :description, class: "form-field" %>
+      </div>
+    </div>
+
     <div class="row form-commands">
       <div class="col-md-6">
         <%= link_to t('.cancel'), items_url %>

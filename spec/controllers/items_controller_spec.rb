@@ -118,12 +118,18 @@ describe ItemsController do
 
         it 'creates an Item' do
           expect do
-            post :create, item: { user_id: @user }
+            post :create, item: {
+              cost_price: 10, name: "Item", quantity: 1,
+              status: :available, unitary_price: 10, user_id: @user
+            }
           end.to change(Item, :count).by(1)
         end
 
         it 'redirects to :index' do
-          post :create, item: { user_id: @user }
+          post :create, item: {
+            cost_price: 10, name: "Item", quantity: 1,
+            status: :available, unitary_price: 10, user_id: @user
+          }
           expect(response).to redirect_to(action: :index)
         end
 

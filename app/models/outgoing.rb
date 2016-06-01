@@ -27,4 +27,9 @@ class Outgoing < ActiveRecord::Base
     where(user: user)
   end
 
+  def value=(money)
+    unmasked = unmask_currency(money) if money.present?
+    self[:value] = unmasked
+  end
+
 end
