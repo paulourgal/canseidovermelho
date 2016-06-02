@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   get "sign_up" => "users#new", :as => "sign_up"
 
   resources :categories, only: [:index, :new, :create]
+  resources :clients, only: [:index, :new, :create]
   resources :incomings, only: [:index, :new, :create]
   resources :items, only: [:index, :new, :create]
   resources :password_resets

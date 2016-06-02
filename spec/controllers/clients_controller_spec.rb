@@ -1,25 +1,19 @@
 require 'rails_helper'
 
-describe ItemsController do
+describe ClientsController do
 
   context "routes" do
 
-    it "get /items to action index" do
-      expect(get: "items").to route_to(
-        controller: "items", action: "index"
-      )
+    it "get /clients to action index" do
+      expect(get: "clients").to route_to(controller: "clients", action: "index")
     end
 
-    it "get /items/new to action new" do
-      expect(get: "items/new").to route_to(
-        controller: "items", action: "new"
-      )
+    it 'get /clients/new to action new' do
+      expect(get: "clients/new").to route_to(controller: "clients", action: "new")
     end
 
-    it "post /items to action create" do
-      expect(post: "items").to route_to(
-        controller: "items", action: "create"
-      )
+    it 'post /clients to action create' do
+      expect(post: "clients").to route_to(controller: "clients", action: "create")
     end
 
   end
@@ -49,11 +43,11 @@ describe ItemsController do
         expect(response).to render_template(:index)
       end
 
-      it 'assigns items' do
-        create(:item)
-        items = create_list(:item, 2, user: @user)
+      it 'assigns clients' do
+        create(:client)
+        clients = create_list(:client, 2, user: @user)
         get :index
-        expect(assigns(:items)).to match_array(items)
+        expect(assigns(:clients)).to match_array(clients)
       end
 
     end
@@ -85,8 +79,8 @@ describe ItemsController do
         expect(response).to render_template(:new)
       end
 
-      it 'assigns item' do
-        expect(assigns(:item)).to be_a_new(Item)
+      it 'assigns client' do
+        expect(assigns(:client)).to be_a_new(Client)
       end
 
     end
@@ -98,7 +92,7 @@ describe ItemsController do
     context 'with unauthenticated user' do
 
       it 'redirects to login' do
-        post :create, item: { user_id: 1 }
+        post :create, client: { user_id: 1 }
         expect(response).to redirect_to(root_url)
       end
 
@@ -115,19 +109,19 @@ describe ItemsController do
 
       context 'and success' do
 
-        it 'creates an Item' do
+        it 'creates an Client' do
           expect do
-            post :create, item: {
-              cost_price: 10, name: "Item", quantity: 1,
-              status: :available, unitary_price: 10, user_id: @user
+            post :create, client: {
+              address: "Rua Teste", email: "email@example.com", name: "Client", phone: "99999999",
+              observations: "TESTE", status: :active, user_id: @user
             }
-          end.to change(Item, :count).by(1)
+          end.to change(Client, :count).by(1)
         end
 
         it 'redirects to :index' do
-          post :create, item: {
-            cost_price: 10, name: "Item", quantity: 1,
-            status: :available, unitary_price: 10, user_id: @user
+          post :create, client: {
+            address: "Rua Teste", email: "email@example.com", name: "Client", phone: "99999999",
+            observations: "TESTE", status: :active, user_id: @user
           }
           expect(response).to redirect_to(action: :index)
         end
@@ -136,14 +130,14 @@ describe ItemsController do
 
       context 'and fails' do
 
-        it 'does not create an item' do
+        it 'does not create an client' do
           expect do
-            post :create, item: { user_id: nil }
-          end.to change(Item, :count).by(0)
+            post :create, client: { user_id: nil }
+          end.to change(Client, :count).by(0)
         end
 
         it 'render template new when fails' do
-          post :create, item: { user_id: nil }
+          post :create, client: { user_id: nil }
           expect(response).to render_template(:new)
         end
 

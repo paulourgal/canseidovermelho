@@ -1,0 +1,26 @@
+pt-BR:
+  activerecord:
+    attributes:
+      client:
+        address: "Endereço"
+        email: "E-mail"
+        name: "Nome"
+        phone: "Telefone"
+        observations: "Observações"
+        status: "Situação"
+        statuses:
+          active: "Ativo"
+          inactive: "Inativo"
+
+  errors:
+    models:
+      client:
+        attributes:
+          address:
+            blank: "Endereço deve ser preenchido"
+          name:
+            blank: "Nome deve ser preenchido"
+          phone:
+            blank: "Telefone deve ser preenchido"
+          user_id:
+            blank: "Usuário deve ser definido"

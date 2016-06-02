@@ -1,0 +1,5 @@
+pt-BR:
+  clients:
+    new:
+      cancel: Cancelar
+      create: Cadastrar

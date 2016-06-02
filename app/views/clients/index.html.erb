@@ -1,0 +1,47 @@
+<div class="row">
+  <div class="col-md-12">
+    <%= link_to "Novo Cliente", new_client_path, class: 'pull-right' %>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+
+    <ul class="list">
+
+      <li class="list-header">
+        <div class="row">
+          <div class="col-md-4">
+            <%= "Situação" %>
+          </div>
+          <div class="col-md-4">
+            <%= "Nome" %>
+          </div>
+          <div class="col-md-4">
+            <%= "Telefone" %>
+          </div>
+        </div>
+      </li>
+
+      <% @clients.each do |client| %>
+
+        <li class="list-client">
+          <div class="row">
+            <div class="col-md-4">
+              <%= Client.status_str(client.status) %>
+            </div>
+            <div class="col-md-4">
+              <%= client.name %>
+            </div>
+            <div class="col-md-4">
+              <%= client.phone %>
+            </div>
+          </div>
+        </li>
+
+      <% end %>
+
+    </ul>
+
+  </div>
+</div>
