@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-md-12">
-    <%= link_to "Nova Entrada", new_incoming_path, class: 'pull-right' %>
+    <%= link_to "Nova Venda", new_sale_path, class: 'pull-right' %>
   </div>
 </div>
 
@@ -15,26 +15,26 @@
             <%= "Dia" %>
           </div>
           <div class="col-md-4">
-            <%= "Categoria" %>
+            <%= "Cliente" %>
           </div>
           <div class="col-md-4">
-            <%= "Valor" %>
+            <%= "Valor Total" %>
           </div>
         </div>
       </li>
 
-      <% @incomings.each do |incoming| %>
+      <% @sales.each do |sale| %>
 
         <li class="list-item">
           <div class="row">
             <div class="col-md-4">
-              <%= l(incoming.day) %>
+              <%= l(sale.date) %>
             </div>
             <div class="col-md-4">
-              <%= incoming.category_name %>
+              <%= sale.client_name %>
             </div>
             <div class="col-md-4">
-              <%= "R$#{number_with_precision(incoming.value.to_f, precision: 2)}" %>
+              <%= sale.id %>
             </div>
           </div>
         </li>

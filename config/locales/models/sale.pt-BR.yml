@@ -1,0 +1,16 @@
+pt-BR:
+  activerecord:
+    attributes:
+      sale:
+        client_id: "Cliente"
+        date: "Dia"
+        value: "Valor (R$)"
+
+  errors:
+    models:
+      sale:
+        attributes:
+          client_id:
+            blank: "Cliente deve ser preenchido"
+          date:
+            blank: "Dia deve ser preenchido"

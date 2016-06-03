@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   resources :items, only: [:index, :new, :create]
   resources :password_resets
   resources :outgoings, only: [:index, :new, :create]
+  resources :sales, only: [:index, :new, :create]
   resources :sessions
   resources :users
 

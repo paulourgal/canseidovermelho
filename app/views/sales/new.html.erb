@@ -1,0 +1,50 @@
+<div class="form-container">
+
+  <h1 class="form-title">Nova Venda</h2>
+
+  <% flash.each do |name, msg| %>
+    <%= content_tag :div, msg, :id => "flash_#{name}" %>
+  <% end %>
+
+  <%= form_for @sale, html: { class: 'form' } do |f| %>
+
+  <%= f.hidden_field :user_id, value: current_user.id %>
+
+    <div class="row">
+      <div class="col-md-12">
+        <%= f.label :date %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12 field">
+        <%= f.text_field :date, class: "form-field datepicker" %>
+        <%= render 'shared/error_message', resource: @sale, attribute: :date %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12">
+        <%= f.label :client_id %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12 field">
+        <%= f.select :client_id, options_for_select(@clients.collect { |client| [client.name, client.id] }, @sale.client_id), { include_blank: t('helpers.select.prompt') }, { class: 'form-field' } %>
+        <%= render 'shared/error_message', resource: @sale, attribute: :client_id %>
+      </div>
+    </div>
+
+    <div class="row form-commands">
+      <div class="col-md-6">
+        <%= link_to t('.cancel'), incomings_url %>
+      </div>
+      <div class="col-md-6">
+        <%= f.submit t('.create'), class: 'pull-right' %>
+      </div>
+    </div>
+
+  <% end %>
+
+</div>
