@@ -71,6 +71,7 @@ describe SalesController do
         @user = create_user_with_encrypted_password(:user)
         create(:client)
         @clients = create_list(:client, 2, user: @user)
+        @items = create_list(:item, 2, user: @user)
         sign_in(@user)
         get :new
       end
@@ -85,8 +86,16 @@ describe SalesController do
         expect(assigns(:sale)).to be_a_new(Sale)
       end
 
+      it 'sale.sale_items.count == 1' do
+        expect(assigns(:sale).sale_items.first).to be_a_kind_of(SaleItem)
+      end
+
       it 'assigns clients' do
         expect(assigns(:clients)).to match_array(@clients)
+      end
+
+      it 'assigns items' do
+        expect(assigns(:items)).to match_array(@items)
       end
 
     end
@@ -117,14 +126,22 @@ describe SalesController do
 
         it 'redirects to :index' do
           client = create(:client, user: @user)
-          post :create, sale: { client_id: client, date: Date.today, user_id: @user }
+          item = create(:item, user: @user)
+          post :create, sale: {
+            client_id: client, date: Date.today, user_id: @user,
+            sale_items_attributes: { '0' => { price: 10, item_id: item } }
+          }
           expect(response).to redirect_to(action: :index)
         end
 
         it 'creates an Sale' do
           client = create(:client, user: @user)
+          item = create(:item, user: @user)
           expect do
-            post :create, sale: { client_id: client, date: Date.today, user_id: @user }
+            post :create, sale: {
+              client_id: client, date: Date.today, user_id: @user,
+              sale_items_attributes: { '0' => { price: 10, item_id: item } }
+            }
           end.to change(Sale, :count).by(1)
         end
 
@@ -143,11 +160,23 @@ describe SalesController do
           expect(response).to render_template(:new)
         end
 
+        it 'sale.sale_items.count == 1' do
+          post :create, sale: { user_id: nil }
+          expect(assigns(:sale).sale_items.first).to be_a_kind_of(SaleItem)
+        end
+
         it 'assigns clients' do
           create(:client)
           clients = create_list(:client, 2, user: @user)
           post :create, sale: { user_id: nil }
           expect(assigns(:clients)).to match_array(clients)
+        end
+
+        it 'assigns items' do
+          create(:item)
+          items = create_list(:item, 2, user: @user)
+          post :create, sale: { user_id: nil }
+          expect(assigns(:items)).to match_array(items)
         end
 
       end

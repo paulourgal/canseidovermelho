@@ -20,10 +20,30 @@ describe Sale do
 
   end
 
+  context 'has_many' do
+
+    it 'sale_items' do
+      expect(sale).to have_many(:sale_items).dependent(:destroy)
+    end
+
+    it 'items through sale_items' do
+      expect(sale).to have_many(:items).through(:sale_items)
+    end
+
+  end
+
   context 'delegations' do
 
     it 'name to client with prefix' do
       expect(sale).to respond_to(:client_name)
+    end
+
+  end
+
+  context 'accept nested attributes for' do
+
+    it 'sale_items' do
+      expect(sale).to accept_nested_attributes_for(:sale_items).allow_destroy(:true)
     end
 
   end

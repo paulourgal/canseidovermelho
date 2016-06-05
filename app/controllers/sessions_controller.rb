@@ -5,7 +5,7 @@ class SessionsController < ApplicationController
     if result[:error].blank?
       cookies[:auth_token] = result[:user].auth_token
       flash.now.notice = "Usuário logado"
-      redirect_to incomings_path
+      redirect_to sales_path
     else
       redirect_to root_url, alert: result[:error]
     end

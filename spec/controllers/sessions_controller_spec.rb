@@ -16,9 +16,9 @@ describe SessionsController do
       expect(cookies[:auth_token]).to eq(user.auth_token)
     end
 
-    it 'redirects to incomings_path when user autheticates' do
+    it 'redirects to sales_path when user autheticates' do
       post :create, email: user.email, password: user.password
-      expect(response).to redirect_to(incomings_path)
+      expect(response).to redirect_to(sales_path)
     end
 
     it 'redirects to root_url when user not autheticate' do

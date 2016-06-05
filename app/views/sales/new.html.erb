@@ -11,34 +11,62 @@
   <%= f.hidden_field :user_id, value: current_user.id %>
 
     <div class="row">
-      <div class="col-md-12">
+      <div class="col-md-3">
         <%= f.label :date %>
       </div>
-    </div>
 
-    <div class="row">
-      <div class="col-md-12 field">
-        <%= f.text_field :date, class: "form-field datepicker" %>
-        <%= render 'shared/error_message', resource: @sale, attribute: :date %>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col-md-12">
+      <div class="col-md-9">
         <%= f.label :client_id %>
       </div>
     </div>
 
     <div class="row">
-      <div class="col-md-12 field">
+      <div class="col-md-3 field">
+        <%= f.text_field :date, class: "form-field datepicker" %>
+        <%= render 'shared/error_message', resource: @sale, attribute: :date %>
+      </div>
+
+      <div class="col-md-9 field">
         <%= f.select :client_id, options_for_select(@clients.collect { |client| [client.name, client.id] }, @sale.client_id), { include_blank: t('helpers.select.prompt') }, { class: 'form-field' } %>
         <%= render 'shared/error_message', resource: @sale, attribute: :client_id %>
       </div>
     </div>
 
+    <div class="row">
+      <div class="col-md-12">
+        <h3>Itens</h3>
+      </div>
+    </div>
+
+    <%= f.fields_for :sale_items do |sale_item_form| %>
+
+      <div class="row">
+        <div class="col-md-8">
+          <%= sale_item_form.label :item_id %>
+        </div>
+
+        <div class="col-md-4">
+          <%= sale_item_form.label :price %>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-8 field">
+          <%= sale_item_form.select :item_id, options_for_select(@items.collect { |item| [item.name, item.id] }, sale_item_form.object.item_id), { include_blank: t('helpers.select.prompt') }, { class: 'form-field' } %>
+          <%= render 'shared/error_message', resource: sale_item_form.object, attribute: :item_id %>
+        </div>
+
+        <div class="col-md-4 field">
+          <%= sale_item_form.text_field :price, class: "form-field money-field" %>
+          <%= render 'shared/error_message', resource: sale_item_form.object, attribute: :price %>
+        </div>
+      </div>
+
+    <% end %>
+
     <div class="row form-commands">
       <div class="col-md-6">
-        <%= link_to t('.cancel'), incomings_url %>
+        <%= link_to t('.cancel'), sales_url %>
       </div>
       <div class="col-md-6">
         <%= f.submit t('.create'), class: 'pull-right' %>

@@ -6,7 +6,9 @@ class SalesController < PlatformController
 
   def new
     @sale = Sale.new
+    5.times { @sale.sale_items.build }
     @clients = Client.by_user(current_user)
+    @items = Item.by_user(current_user)
   end
 
   def create
@@ -16,7 +18,9 @@ class SalesController < PlatformController
       redirect_to action: :index
     else
       flash.now.alert = "Falha ao criar venda."
+      @sale.sale_items.build
       @clients = Client.by_user(current_user)
+      @items = Item.by_user(current_user)
       render :new
     end
   end
@@ -24,7 +28,9 @@ class SalesController < PlatformController
   private
 
   def sale_params
-    params.require(:sale).permit(:id, :client_id, :date, :user_id)
+    params.require(:sale).permit(
+      :id, :client_id, :date, :user_id, sale_items_attributes: [:id, :price, :item_id, :_destroy]
+    )
   end
 
 end

@@ -5,9 +5,16 @@ class Sale < ActiveRecord::Base
   belongs_to :client
   belongs_to :user
 
+  has_many :sale_items, dependent: :destroy
+  has_many :items, through: :sale_items
+
   # delegations
 
   delegate :name, to: :client, prefix: true
+
+  # nested attributes
+
+  accepts_nested_attributes_for :sale_items, allow_destroy: :true, reject_if: :all_blank
 
   # validations
 
