@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-md-12">
-    <%= link_to "Novo Item", new_item_path, class: 'pull-right' %>
+    <%= link_to t('.new'), new_item_path, class: 'pull-right' %>
   </div>
 </div>
 
@@ -11,16 +11,16 @@
 
       <li class="list-header">
         <div class="row">
-          <div class="col-md-3">
+          <div class="col-md-2">
             <%= "Situação" %>
           </div>
           <div class="col-md-3">
             <%= "Nome" %>
           </div>
-          <div class="col-md-3">
+          <div class="col-md-2">
             <%= "Preço de Custo" %>
           </div>
-          <div class="col-md-3">
+          <div class="col-md-2">
             <%= "Preço de Venda" %>
           </div>
         </div>
@@ -30,17 +30,21 @@
 
         <li class="list-item">
           <div class="row">
-            <div class="col-md-3">
+            <div class="col-md-2">
               <%= Item.status_str(item.status) %>
             </div>
             <div class="col-md-3">
               <%= item.name %>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-2">
               <%= "R$#{number_with_precision(item.cost_price.to_f, precision: 2)}" %>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-2">
               <%= "R$#{number_with_precision(item.unitary_price.to_f, precision: 2)}" %>
+            </div>
+            <div class="col-md-3">
+              <%= link_to t('.edit'), edit_item_path(item), class: 'pull-right' %>
+              <%= link_to t('.destroy'), item_path(item.id), method: :delete, class: 'pull-right' %>
             </div>
           </div>
         </li>

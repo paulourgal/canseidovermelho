@@ -1,5 +1,11 @@
 pt-BR:
   items:
+    index:
+      destroy: Remover
+      edit: Editar
+      new: Novo Item
     new:
       cancel: Cancelar
       create: Cadastrar
+    edit:
+      update: Atualizar

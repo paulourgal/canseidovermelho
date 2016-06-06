@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   resources :categories, only: [:index, :new, :create]
   resources :clients, only: [:index, :new, :create]
   resources :incomings, only: [:index, :new, :create]
-  resources :items, only: [:index, :new, :create]
+  resources :items, only: [:index, :new, :create, :edit, :update, :destroy]
   resources :password_resets
   resources :outgoings, only: [:index, :new, :create]
   resources :sales, only: [:index, :new, :create]
