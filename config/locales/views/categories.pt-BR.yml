@@ -1,5 +1,11 @@
 pt-BR:
   categories:
+    index:
+      destroy: Remover
+      edit: Editar
+      new: Nova Categoria
     new:
       cancel: Cancelar
       create: Cadastrar
+    edit:
+      update: Atualizar

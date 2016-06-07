@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   get "confirmation" => "users#confirmation", :as => "confirmation"
   get "sign_up" => "users#new", :as => "sign_up"
 
-  resources :categories, only: [:index, :new, :create]
+  resources :categories, only: [:index, :new, :create, :edit, :update, :destroy]
   resources :clients, only: [:index, :new, :create, :edit, :update, :destroy]
   resources :incomings, only: [:index, :new, :create]
   resources :items, only: [:index, :new, :create, :edit, :update, :destroy]

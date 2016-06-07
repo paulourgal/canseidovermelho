@@ -1,7 +1,7 @@
 
 <div class="row">
   <div class="col-md-12">
-    <%= link_to "Nova categoria", new_category_path, class: 'pull-right' %>
+    <%= link_to t('.new'), new_category_path, class: 'pull-right' %>
   </div>
 </div>
 
@@ -12,10 +12,10 @@
 
       <li class="list-header">
         <div class="row">
-          <div class="col-md-6">
+          <div class="col-md-5">
             <%= "Nome" %>
           </div>
-          <div class="col-md-6">
+          <div class="col-md-4">
             <%= "Tipo" %>
           </div>
       </li>
@@ -24,11 +24,15 @@
 
         <li class="list-item">
           <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-5">
               <%= category.name %>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-4">
               <%= Category::kind_str(category.kind) %>
+            </div>
+            <div class="col-md-3">
+              <%= link_to t('.edit'), edit_category_path(category), class: 'pull-right' %>
+              <%= link_to t('.destroy'), category_path(category.id), method: :delete, class: 'pull-right' %>
             </div>
           </div>
         </li>

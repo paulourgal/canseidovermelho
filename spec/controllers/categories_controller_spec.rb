@@ -28,6 +28,24 @@ describe CategoriesController do
       )
     end
 
+    it "get /categories/:id/edit to action edit" do
+      expect(get: "categories/:id/edit").to route_to(
+        controller: "categories", action: "edit", id: ":id"
+      )
+    end
+
+    it "put /categories/:id to action update" do
+      expect(put: "categories/:id").to route_to(
+        controller: "categories", action: "update", id: ":id"
+      )
+    end
+
+    it "delete /categories/:id to action destroy" do
+      expect(delete: "categories/:id").to route_to(
+        controller: "categories", action: "destroy", id: ":id"
+      )
+    end
+
   end
 
   context "#index" do
@@ -97,6 +115,39 @@ describe CategoriesController do
 
   end
 
+  context '#edit' do
+
+    context 'with unauthenticated user' do
+
+      it 'redirects to login' do
+        get :edit, id: 1
+        expect(response).to redirect_to(root_url)
+      end
+
+    end
+
+    context 'with authenticated user' do
+
+      before(:each) do
+        @category = create(:category, user: user)
+        sign_in(user)
+        get :edit, id: @category.id
+      end
+
+      render_views
+
+      it 'renders template edit' do
+        expect(response).to render_template(:edit)
+      end
+
+      it 'assigns category' do
+        expect(assigns(:category)).to eq(@category)
+      end
+
+    end
+
+  end
+
   context '#create' do
 
     context 'with unauthenticated user' do
@@ -144,6 +195,99 @@ describe CategoriesController do
           expect(response).to render_template(:new)
         end
 
+      end
+
+    end
+
+  end
+
+  context '#update' do
+
+    context 'with unauthenticated user' do
+
+      it 'redirects to login' do
+        put :update, id: 1, category: { user_id: nil }
+        expect(response).to redirect_to(root_url)
+      end
+
+    end
+
+    context 'with authenticated user' do
+
+      before(:each) do
+        @category = create(:category, user: user)
+        sign_in(user)
+      end
+
+      context 'and success' do
+
+        it 'redirects to :edit' do
+          put :update, id: @category.id, category: {
+            kind: @category.kind, name: @category.name, user_id: @category.user_id
+          }
+          expect(response).to redirect_to(action: :edit)
+        end
+
+        it 'changes category attribute' do
+          put :update, id: @category.id, category: {
+            kind: @category.kind, name: "Nova Categoria", user_id: @category.user_id
+          }
+          @category.reload
+          expect(@category.name).to eq("Nova Categoria")
+        end
+
+      end
+
+      context 'and fails' do
+
+        it 'renders template edit' do
+          put :update, id: @category.id, category: {
+            kind: nil, name: @category.name, user_id: @category.user_id
+          }
+          expect(response).to render_template(:edit)
+        end
+
+        it 'does not update category attribute' do
+          put :update, id: @category.id, category: {
+            kind: @category.kind, name: "Nova Categoria", user_id: @category.user_id
+          }
+          @category.reload
+          expect(@category.name).not_to eq("Novo Categoria")
+        end
+
+      end
+
+    end
+
+  end
+
+  context '#destroy' do
+
+    context 'with unauthenticated user' do
+
+      it 'redirects to login' do
+        delete :destroy, id: 1
+        expect(response).to redirect_to(root_url)
+      end
+
+    end
+
+    context 'with authenticated user' do
+
+      before(:each) do
+        @category = create(:category, user: user)
+        sign_in(user)
+      end
+
+      it 'redirects to :index' do
+        delete :destroy, id: @category.id
+        expect(response).to redirect_to(action: :index)
+      end
+
+      it 'decreases Category' do
+        expect do
+          delete :destroy, id: @category.id
+        end.to change(Category, :count).by(-1)
       end
 
     end

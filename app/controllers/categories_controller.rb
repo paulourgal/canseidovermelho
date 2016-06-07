@@ -8,6 +8,10 @@ class CategoriesController < PlatformController
     @category = Category.new
   end
 
+  def edit
+    @category = Category.find(params[:id])
+  end
+
   def create
     @category = Category.new(category_params)
     if @category.save
@@ -17,6 +21,23 @@ class CategoriesController < PlatformController
       flash.now.alert = "Falha ao criar categoria."
       render :new
     end
+  end
+
+  def update
+    @category = Category.find(params[:id])
+    if @category.update(category_params)
+      flash.now.notice = "Categoria atualizado com sucesso."
+      redirect_to action: :edit
+    else
+      flash.now.alert = "Falha ao atualizar categoria."
+      render :edit
+    end
+  end
+
+  def destroy
+    @category = Category.find(params[:id])
+    @category.destroy
+    redirect_to action: :index
   end
 
   private
