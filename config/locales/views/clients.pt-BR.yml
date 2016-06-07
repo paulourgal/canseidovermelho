@@ -1,5 +1,11 @@
 pt-BR:
   clients:
+    index:
+      destroy: Remover
+      edit: Editar
+      new: Novo Cliente
     new:
       cancel: Cancelar
       create: Cadastrar
+    edit:
+      update: Atualizar

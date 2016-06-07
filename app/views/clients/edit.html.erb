@@ -1,0 +1,92 @@
+<div class="form-container">
+
+  <h1 class="form-title"><%= "Editar - #{@client.name}" %></h2>
+
+  <% flash.each do |name, msg| %>
+    <%= content_tag :div, msg, :id => "flash_#{name}" %>
+  <% end %>
+
+  <%= form_for @client, html: { class: 'form' } do |f| %>
+
+    <%= f.hidden_field :user_id, value: @client.user_id %>
+
+    <div class="row">
+      <div class="col-md-4">
+        <%= f.label :status %>
+      </div>
+
+      <div class="col-md-8">
+        <%= f.label :name %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-4 field">
+        <%= f.select :status, options_for_select(Client.statuses.collect { |status| [Client.status_str(status[0]), status[0]] }, @client.status), { include_blank: t('helpers.select.prompt') }, { class: 'form-field' } %>
+        <%= render 'shared/error_message', resource: @client, attribute: :status %>
+      </div>
+
+      <div class="col-md-8 field">
+        <%= f.text_field :name, class: "form-field" %>
+        <%= render 'shared/error_message', resource: @client, attribute: :name %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-6">
+        <%= f.label :phone %>
+      </div>
+
+      <div class="col-md-6">
+        <%= f.label :email %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-6 field">
+        <%= f.text_field :phone, class: "form-field" %>
+        <%= render 'shared/error_message', resource: @client, attribute: :phone %>
+      </div>
+
+      <div class="col-md-6 field">
+        <%= f.text_field :email, class: "form-field" %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12">
+        <%= f.label :address %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12 field">
+        <%= f.text_field :address, class: "form-field" %>
+        <%= render 'shared/error_message', resource: @client, attribute: :address %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12">
+        <%= f.label :observations %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12 field">
+        <%= f.text_area :observations, class: "form-field" %>
+      </div>
+    </div>
+
+    <div class="row form-commands">
+      <div class="col-md-6">
+        <%= link_to t('.cancel'), clients_url %>
+      </div>
+      <div class="col-md-6">
+        <%= f.submit t('.update'), class: 'pull-right' %>
+      </div>
+    </div>
+
+  <% end %>
+
+</div>

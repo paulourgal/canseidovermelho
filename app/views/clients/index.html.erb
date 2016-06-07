@@ -11,13 +11,13 @@
 
       <li class="list-header">
         <div class="row">
-          <div class="col-md-4">
+          <div class="col-md-3">
             <%= "Situação" %>
           </div>
-          <div class="col-md-4">
+          <div class="col-md-3">
             <%= "Nome" %>
           </div>
-          <div class="col-md-4">
+          <div class="col-md-3">
             <%= "Telefone" %>
           </div>
         </div>
@@ -27,14 +27,18 @@
 
         <li class="list-client">
           <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-3">
               <%= Client.status_str(client.status) %>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-3">
               <%= client.name %>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-3">
               <%= client.phone %>
+            </div>
+            <div class="col-md-3">
+              <%= link_to t('.edit'), edit_client_path(client), class: 'pull-right' %>
+              <%= link_to t('.destroy'), client_path(client.id), method: :delete, class: 'pull-right' %>
             </div>
           </div>
         </li>

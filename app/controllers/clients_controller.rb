@@ -8,6 +8,10 @@ class ClientsController < PlatformController
     @client = Client.new
   end
 
+  def edit
+    @client = Client.find(params[:id])
+  end
+
   def create
     @client = Client.new(client_params)
     if @client.save
@@ -17,6 +21,23 @@ class ClientsController < PlatformController
       flash.now.alert = "Falha ao criar cliente."
       render :new
     end
+  end
+
+  def update
+    @client = Client.find(params[:id])
+    if @client.update(client_params)
+      flash.now.notice = "Cliente atualizado com sucesso."
+      redirect_to action: :edit
+    else
+      flash.now.alert = "Falha ao atualizar cliente."
+      render :edit
+    end
+  end
+
+  def destroy
+    @client = Client.find(params[:id])
+    @client.destroy
+    redirect_to action: :index
   end
 
   private
