@@ -1,5 +1,13 @@
 pt-BR:
   outgoings:
+    index:
+      destroy: Remover
+      edit: Editar
+      new: Nova Saída
     new:
+      new: Nova Saída
       cancel: Cancelar
       create: Cadastrar
+    edit:
+      edit: Editar Saída
+      update: Atualizar

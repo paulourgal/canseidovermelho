@@ -1,12 +1,17 @@
 class OutgoingsController < PlatformController
 
+  before_filter :categories_for_user, only: [:new, :edit]
+
   def index
     @outgoings = Outgoing.by_user(current_user)
   end
 
   def new
     @outgoing = Outgoing.new
-    @categories = categories_for_user
+  end
+
+  def edit
+    @outgoing = Outgoing.find(params[:id])
   end
 
   def create
@@ -16,15 +21,33 @@ class OutgoingsController < PlatformController
       redirect_to action: :index
     else
       flash.now.alert = "Falha ao criar saída."
-      @categories = categories_for_user
+      categories_for_user
       render :new
     end
+  end
+
+  def update
+    @outgoing = Outgoing.find(params[:id])
+    if @outgoing.update(outgoing_params)
+      flash.now.notice = "Saída atualizada com sucesso."
+      redirect_to action: :edit
+    else
+      flash.now.alert = "Falha ao atualizar saída."
+      categories_for_user
+      render :edit
+    end
+  end
+
+  def destroy
+    @outgoing = Outgoing.find(params[:id])
+    @outgoing.destroy
+    redirect_to action: :index
   end
 
   private
 
   def categories_for_user
-    Category.by_user_and_kind(current_user, Category.kinds[:outgoing])
+    @categories = Category.by_user_and_kind(current_user, Category.kinds[:outgoing])
   end
 
   def outgoing_params

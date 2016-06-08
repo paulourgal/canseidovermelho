@@ -135,6 +135,7 @@ describe IncomingsController do
         @user = create_user_with_encrypted_password(:user)
         @incoming = create(:incoming, user: @user)
         sign_in(@user)
+        @categories = create_list(:category, 2, user: @user, kind: :incoming)
         get :edit, id: @incoming.id
       end
 
@@ -175,7 +176,7 @@ describe IncomingsController do
       before(:each) do
         @user = create_user_with_encrypted_password(:user)
         sign_in(@user)
-        @category = create(:category, user: @user)
+        @categories = create_list(:category, 2, user: @user, kind: :incoming)
       end
 
       render_views
@@ -185,14 +186,14 @@ describe IncomingsController do
         it 'creates an Incoming' do
           expect do
             post :create, incoming: {
-              category_id: @category, day: Date.today, value: 100, user_id: @user
+              category_id: @categories.first, day: Date.today, value: 100, user_id: @user
             }
           end.to change(Incoming, :count).by(1)
         end
 
         it 'redirects to :index' do
           post :create, incoming: {
-            category_id: @category, day: Date.today, value: 100, user_id: @user
+            category_id: @categories.first, day: Date.today, value: 100, user_id: @user
           }
           expect(response).to redirect_to(action: :index)
         end
@@ -210,6 +211,12 @@ describe IncomingsController do
         it 'render template new when fails' do
           post :create, incoming: { user_id: nil }
           expect(response).to render_template(:new)
+        end
+
+        it 'assigns categories for user' do
+          create(:category, user: @user, kind: :outgoing)
+          post :create, incoming: { user_id: nil }
+          expect(assigns(:categories)).to match_array(@categories)
         end
 
       end
@@ -235,6 +242,7 @@ describe IncomingsController do
         @user = create_user_with_encrypted_password(:user)
         @incoming = create(:incoming, user: @user)
         sign_in(@user)
+        @categories = create_list(:category, 2, user: @user, kind: :incoming)
       end
 
       context 'and success' do
@@ -273,6 +281,14 @@ describe IncomingsController do
           }
           @incoming.reload
           expect(@incoming.day).not_to eq(Date.tomorrow)
+        end
+
+        it 'assigns categories for user' do
+          create(:category, user: @user, kind: :outgoing)
+          put :update, id: @incoming.id, incoming: {
+            category_id: nil, day: Date.tomorrow, value: @incoming.value, user_id: @incoming.user_id
+          }
+          expect(assigns(:categories)).to match_array(@categories)
         end
 
       end

@@ -1,6 +1,6 @@
 <div class="form-container">
 
-  <h1 class="form-title"><%= t('.new') %></h1>
+  <h1 class="form-title"><%= t('.edit') %></h1>
 
   <% flash.each do |name, msg| %>
     <%= content_tag :div, msg, :id => "flash_#{name}" %>
@@ -8,7 +8,7 @@
 
   <%= form_for @outgoing, html: { class: 'form' } do |f| %>
 
-  <%= f.hidden_field :user_id, value: current_user.id %>
+  <%= f.hidden_field :user_id, value: @outgoing.user_id %>
 
     <div class="row">
       <div class="col-md-12">
@@ -54,7 +54,7 @@
         <%= link_to t('.cancel'), outgoings_url %>
       </div>
       <div class="col-md-6">
-        <%= f.submit t('.create'), class: 'pull-right' %>
+        <%= f.submit t('.update'), class: 'pull-right' %>
       </div>
     </div>
 

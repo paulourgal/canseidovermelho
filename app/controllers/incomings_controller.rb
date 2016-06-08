@@ -21,7 +21,7 @@ class IncomingsController < PlatformController
       redirect_to action: :index
     else
       flash.now.alert = "Falha ao criar entrada."
-      @categories = categories_for_user
+      categories_for_user
       render :new
     end
   end
@@ -33,6 +33,7 @@ class IncomingsController < PlatformController
       redirect_to action: :edit
     else
       flash.now.alert = "Falha ao atualizar entrada."
+      categories_for_user
       render :edit
     end
   end

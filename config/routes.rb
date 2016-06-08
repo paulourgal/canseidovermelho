@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   resources :incomings, only: [:index, :new, :create, :edit, :update, :destroy]
   resources :items, only: [:index, :new, :create, :edit, :update, :destroy]
   resources :password_resets
-  resources :outgoings, only: [:index, :new, :create]
+  resources :outgoings, only: [:index, :new, :create, :edit, :update, :destroy]
   resources :sales, only: [:index, :new, :create]
   resources :sessions
   resources :users
