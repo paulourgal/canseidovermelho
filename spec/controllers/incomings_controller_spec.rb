@@ -22,6 +22,24 @@ describe IncomingsController do
       )
     end
 
+    it "get /incomings/:id/edit to action edit" do
+      expect(get: "incomings/:id/edit").to route_to(
+        controller: "incomings", action: "edit", id: ":id"
+      )
+    end
+
+    it "put /incomings/:id to action update" do
+      expect(put: "incomings/:id").to route_to(
+        controller: "incomings", action: "update", id: ":id"
+      )
+    end
+
+    it "delete /incomings/:id to action destroy" do
+      expect(delete: "incomings/:id").to route_to(
+        controller: "incomings", action: "destroy", id: ":id"
+      )
+    end
+
   end
 
   context "#index" do
@@ -100,6 +118,46 @@ describe IncomingsController do
 
   end
 
+  context '#edit' do
+
+    context 'with unauthenticated user' do
+
+      it 'redirects to login' do
+        get :edit, id: 1
+        expect(response).to redirect_to(root_url)
+      end
+
+    end
+
+    context 'with authenticated user' do
+
+      before(:each) do
+        @user = create_user_with_encrypted_password(:user)
+        @incoming = create(:incoming, user: @user)
+        sign_in(@user)
+        get :edit, id: @incoming.id
+      end
+
+      render_views
+
+      it 'renders template edit' do
+        expect(response).to render_template(:edit)
+      end
+
+      it 'assigns incoming' do
+        expect(assigns(:incoming)).to eq(@incoming)
+      end
+
+      it 'assigns categories for user' do
+        create(:category, user: @user, kind: :outgoing)
+        create(:category, kind: :incoming)
+        expect(assigns(:categories)).to match_array(@categories)
+      end
+
+    end
+
+  end
+
   context '#create' do
 
     context 'with unauthenticated user' do
@@ -154,6 +212,103 @@ describe IncomingsController do
           expect(response).to render_template(:new)
         end
 
+      end
+
+    end
+
+  end
+
+  context '#update' do
+
+    context 'with unauthenticated user' do
+
+      it 'redirects to login' do
+        put :update, id: 1, incoming: { user_id: nil }
+        expect(response).to redirect_to(root_url)
+      end
+
+    end
+
+    context 'with authenticated user' do
+
+      before(:each) do
+        @user = create_user_with_encrypted_password(:user)
+        @incoming = create(:incoming, user: @user)
+        sign_in(@user)
+      end
+
+      context 'and success' do
+
+        it 'redirects to :edit' do
+          put :update, id: @incoming.id, incoming: {
+            category_id: @incoming.category_id, day: @incoming.day,
+            value: @incoming.value, user_id: @incoming.user_id
+          }
+          expect(response).to redirect_to(action: :edit)
+        end
+
+        it 'changes incoming attribute' do
+          put :update, id: @incoming.id, incoming: {
+            category_id: @incoming.category_id, day: Date.tomorrow,
+            value: @incoming.value, user_id: @incoming.user_id
+          }
+          @incoming.reload
+          expect(@incoming.day).to eq(Date.tomorrow)
+        end
+
+      end
+
+      context 'and fails' do
+
+        it 'renders template edit' do
+          put :update, id: @incoming.id, incoming: {
+            category_id: nil, day: @incoming.day, value: @incoming.value, user_id: @incoming.user_id
+          }
+          expect(response).to render_template(:edit)
+        end
+
+        it 'does not update incoming attribute' do
+          put :update, id: @incoming.id, incoming: {
+            category_id: nil, day: Date.tomorrow, value: @incoming.value, user_id: @incoming.user_id
+          }
+          @incoming.reload
+          expect(@incoming.day).not_to eq(Date.tomorrow)
+        end
+
+      end
+
+    end
+
+  end
+
+  context '#destroy' do
+
+    context 'with unauthenticated user' do
+
+      it 'redirects to login' do
+        delete :destroy, id: 1
+        expect(response).to redirect_to(root_url)
+      end
+
+    end
+
+    context 'with authenticated user' do
+
+      before(:each) do
+        @user = create_user_with_encrypted_password(:user)
+        @incoming = create(:incoming, user: @user)
+        sign_in(@user)
+      end
+
+      it 'redirects to :index' do
+        delete :destroy, id: @incoming.id
+        expect(response).to redirect_to(action: :index)
+      end
+
+      it 'decreases Incoming' do
+        expect do
+          delete :destroy, id: @incoming.id
+        end.to change(Incoming, :count).by(-1)
       end
 
     end

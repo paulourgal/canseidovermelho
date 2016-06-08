@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-md-12">
-    <%= link_to "Nova Entrada", new_incoming_path, class: 'pull-right' %>
+    <%= link_to t('.new'), new_incoming_path, class: 'pull-right' %>
   </div>
 </div>
 
@@ -11,13 +11,13 @@
 
       <li class="list-header">
         <div class="row">
-          <div class="col-md-4">
+          <div class="col-md-3">
             <%= "Dia" %>
           </div>
-          <div class="col-md-4">
+          <div class="col-md-3">
             <%= "Categoria" %>
           </div>
-          <div class="col-md-4">
+          <div class="col-md-3">
             <%= "Valor" %>
           </div>
         </div>
@@ -27,14 +27,18 @@
 
         <li class="list-item">
           <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-3">
               <%= l(incoming.day) %>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-3">
               <%= incoming.category_name %>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-3">
               <%= "R$#{number_with_precision(incoming.value.to_f, precision: 2)}" %>
+            </div>
+            <div class="col-md-3">
+              <%= link_to t('.edit'), edit_incoming_path(incoming), class: 'pull-right' %>
+              <%= link_to t('.destroy'), incoming_path(incoming.id), method: :delete, class: 'pull-right' %>
             </div>
           </div>
         </li>

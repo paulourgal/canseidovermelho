@@ -1,12 +1,17 @@
 class IncomingsController < PlatformController
 
+  before_filter :categories_for_user, only: [:new, :edit]
+
   def index
     @incomings = Incoming.by_user(current_user)
   end
 
   def new
     @incoming = Incoming.new
-    @categories = categories_for_user
+  end
+
+  def edit
+    @incoming = Incoming.find(params[:id])
   end
 
   def create
@@ -21,10 +26,27 @@ class IncomingsController < PlatformController
     end
   end
 
+  def update
+    @incoming = Incoming.find(params[:id])
+    if @incoming.update(incoming_params)
+      flash.now.notice = "Entrada atualizada com sucesso."
+      redirect_to action: :edit
+    else
+      flash.now.alert = "Falha ao atualizar entrada."
+      render :edit
+    end
+  end
+
+  def destroy
+    @incoming = Incoming.find(params[:id])
+    @incoming.destroy
+    redirect_to action: :index
+  end
+
   private
 
   def categories_for_user
-    Category.by_user_and_kind(current_user, Category.kinds[:incoming])
+    @categories = Category.by_user_and_kind(current_user, Category.kinds[:incoming])
   end
 
   def incoming_params

@@ -1,5 +1,13 @@
 pt-BR:
   incomings:
+    index:
+      destroy: Remover
+      edit: Editar
+      new: Nova Entrada
     new:
+      new: Nova Entrada
       cancel: Cancelar
       create: Cadastrar
+    edit:
+      edit: Editar Entrada
+      update: Atualizar
