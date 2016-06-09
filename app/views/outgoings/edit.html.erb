@@ -44,7 +44,7 @@
 
     <div class="row">
       <div class="col-md-12 field">
-        <%= f.text_field :value, class: "form-field money-field" %>
+        <%= f.text_field :value, value: currency(@outgoing.value), class: "form-field money-field" %>
         <%= render 'shared/error_message', resource: @outgoing, attribute: :value %>
       </div>
     </div>

@@ -57,7 +57,7 @@
         </div>
 
         <div class="col-md-4 field">
-          <%= sale_item_form.text_field :price, class: "form-field money-field" %>
+          <%= sale_item_form.text_field :price, value: currency(sale_item_form.object.price), class: "form-field money-field" %>
           <%= render 'shared/error_message', resource: sale_item_form.object, attribute: :price %>
         </div>
       </div>
