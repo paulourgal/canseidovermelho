@@ -1,5 +1,13 @@
 pt-BR:
   sales:
+    index:
+      destroy: Remover
+      edit: Editar
+      new: Nova Venda
     new:
+      new: Nova Venda
       cancel: Cancelar
       create: Cadastrar
+    edit:
+      edit: Editar Venda
+      update: Atualizar

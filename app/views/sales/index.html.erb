@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-md-12">
-    <%= link_to "Nova Venda", new_sale_path, class: 'pull-right' %>
+    <%= link_to t('.new'), new_sale_path, class: 'pull-right' %>
   </div>
 </div>
 
@@ -11,13 +11,13 @@
 
       <li class="list-header">
         <div class="row">
-          <div class="col-md-4">
+          <div class="col-md-3">
             <%= "Dia" %>
           </div>
-          <div class="col-md-4">
+          <div class="col-md-3">
             <%= "Cliente" %>
           </div>
-          <div class="col-md-4">
+          <div class="col-md-3">
             <%= "Valor Total" %>
           </div>
         </div>
@@ -27,14 +27,18 @@
 
         <li class="list-item">
           <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-3">
               <%= l(sale.date) %>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-3">
               <%= sale.client_name %>
             </div>
-            <div class="col-md-4">
-
+            <div class="col-md-3">
+              Valor Total
+            </div>
+            <div class="col-md-3">
+              <%= link_to t('.edit'), edit_sale_path(sale), class: 'pull-right' %>
+              <%= link_to t('.destroy'), sale_path(sale.id), method: :delete, class: 'pull-right' %>
             </div>
           </div>
         </li>

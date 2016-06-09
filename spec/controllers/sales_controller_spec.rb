@@ -16,6 +16,24 @@ describe SalesController do
       expect(post: "sales").to route_to(controller: "sales", action: "create")
     end
 
+    it "get /sales/:id/edit to action edit" do
+      expect(get: "sales/:id/edit").to route_to(
+        controller: "sales", action: "edit", id: ":id"
+      )
+    end
+
+    it "put /sales/:id to action update" do
+      expect(put: "sales/:id").to route_to(
+        controller: "sales", action: "update", id: ":id"
+      )
+    end
+
+    it "delete /sales/:id to action destroy" do
+      expect(delete: "sales/:id").to route_to(
+        controller: "sales", action: "destroy", id: ":id"
+      )
+    end
+
   end
 
   context '#index' do
@@ -88,6 +106,50 @@ describe SalesController do
 
       it 'sale.sale_items.count == 1' do
         expect(assigns(:sale).sale_items.first).to be_a_kind_of(SaleItem)
+      end
+
+      it 'assigns clients' do
+        expect(assigns(:clients)).to match_array(@clients)
+      end
+
+      it 'assigns items' do
+        expect(assigns(:items)).to match_array(@items)
+      end
+
+    end
+
+  end
+
+  context '#edit' do
+
+    context 'with unauthenticated user' do
+
+      it 'redirects to login' do
+        get :edit, id: 1
+        expect(response).to redirect_to(root_url)
+      end
+
+    end
+
+    context 'with authenticated user' do
+
+      before(:each) do
+        @user = create_user_with_encrypted_password(:user)
+        @sale = create(:sale, user: @user)
+        @clients = create_list(:client, 2, user: @user)
+        @items = create_list(:item, 2, user: @user)
+        sign_in(@user)
+        get :edit, id: @sale.id
+      end
+
+      render_views
+
+      it 'renders template edit' do
+        expect(response).to render_template(:edit)
+      end
+
+      it 'assigns sale' do
+        expect(assigns(:sale)).to eq(@sale)
       end
 
       it 'assigns clients' do
@@ -179,6 +241,117 @@ describe SalesController do
           expect(assigns(:items)).to match_array(items)
         end
 
+      end
+
+    end
+
+  end
+
+  context '#update' do
+
+    context 'with unauthenticated user' do
+
+      it 'redirects to login' do
+        put :update, id: 1, sale: { user_id: nil }
+        expect(response).to redirect_to(root_url)
+      end
+
+    end
+
+    context 'with authenticated user' do
+
+      before(:each) do
+        @user = create_user_with_encrypted_password(:user)
+        @sale = create(:sale, user: @user)
+        sign_in(@user)
+      end
+
+      context 'and success' do
+
+        it 'redirects to :edit' do
+          put :update, id: @sale.id, sale: {
+            client_id: @sale.client_id, date: @sale.date, user_id: @sale.user_id
+          }
+          expect(response).to redirect_to(action: :edit)
+        end
+
+        it 'changes sale attribute' do
+          put :update, id: @sale.id, sale: {
+            client_id: @sale.client_id, date: Date.tomorrow, user_id: @sale.user_id
+          }
+          @sale.reload
+          expect(@sale.date).to eq(Date.tomorrow)
+        end
+
+      end
+
+      context 'and fails' do
+
+        it 'renders template edit' do
+          put :update, id: @sale.id, sale: {
+            client_id: nil, date: Date.tomorrow, user_id: @sale.user_id
+          }
+          expect(response).to render_template(:edit)
+        end
+
+        it 'does not update sale attribute' do
+          put :update, id: @sale.id, sale: {
+            client_id: nil, date: Date.tomorrow, user_id: @sale.user_id
+          }
+          @sale.reload
+          expect(@sale.date).not_to eq(Date.tomorrow)
+        end
+
+        it 'assigns clients' do
+          create(:client)
+          clients = create_list(:client, 2, user: @user)
+          put :update, id: @sale.id, sale: {
+            client_id: nil, date: Date.tomorrow, user_id: @sale.user_id
+          }
+          expect(assigns(:clients)).to match_array(clients)
+        end
+
+        it 'assigns items' do
+          create(:item)
+          items = create_list(:item, 2, user: @user)
+          put :update, id: @sale.id, sale: {
+            client_id: nil, date: Date.tomorrow, user_id: @sale.user_id
+          }
+          expect(assigns(:items)).to match_array(items)
+        end
+
+      end
+
+    end
+
+  end
+
+  context '#destroy' do
+
+    context 'with unauthenticated user' do
+
+      it 'redirects to login' do
+        delete :destroy, id: 1
+        expect(response).to redirect_to(root_url)
+      end
+
+    end
+
+    context 'with authenticated user' do
+
+      before(:each) do
+        @user = create_user_with_encrypted_password(:user)
+        @sale = create(:sale, user: @user)
+        sign_in(@user)
+      end
+
+      it 'redirects to :index' do
+        delete :destroy, id: @sale.id
+        expect(response).to redirect_to(action: :index)
+      end
+
+      it 'decreases Sale' do
+        expect { delete :destroy, id: @sale.id }.to change(Sale, :count).by(-1)
       end
 
     end
