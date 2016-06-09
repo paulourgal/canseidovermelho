@@ -31,7 +31,7 @@
 
     <div class="row">
       <div class="col-md-12 field">
-        <%= f.text_field :day, class: "form-field datepicker" %>
+        <%= f.text_field :day, value: @outgoing.day.strftime("%d-%m-%Y"), class: "form-field datepicker" %>
         <%= render 'shared/error_message', resource: @outgoing, attribute: :day %>
       </div>
     </div>

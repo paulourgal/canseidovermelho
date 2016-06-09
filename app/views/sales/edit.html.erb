@@ -22,7 +22,7 @@
 
     <div class="row">
       <div class="col-md-3 field">
-        <%= f.text_field :date, class: "form-field datepicker" %>
+        <%= f.text_field :date, value: @sale.date.strftime("%d-%m-%Y"), class: "form-field datepicker" %>
         <%= render 'shared/error_message', resource: @sale, attribute: :date %>
       </div>
 
