@@ -1,5 +1,6 @@
 pt-BR:
   users:
     new:
+      title: Cadastra Novo Usuário
       cancel: Cancelar
       create: Cadastrar

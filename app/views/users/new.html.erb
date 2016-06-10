@@ -2,7 +2,7 @@
 
   <h1 class="form-title">Can$ei do <span class="red">Vermelho<span></h1>
 
-  <h2 class="form-subtitle">Cadastrar Novo Usuário</h2>
+  <h2 class="form-subtitle"><%= t('.title') %></h2>
 
   <% flash.each do |name, msg| %>
     <%= content_tag :div, msg, :id => "flash_#{name}" %>

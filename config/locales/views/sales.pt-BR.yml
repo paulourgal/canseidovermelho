@@ -1,13 +1,16 @@
 pt-BR:
   sales:
     index:
+      client: Cliente
+      day: Dia
       destroy: Remover
       edit: Editar
       new: Nova Venda
+      total_value: Valor Total
     new:
-      new: Nova Venda
+      title: Nova Venda
       cancel: Cancelar
       create: Cadastrar
     edit:
-      edit: Editar Venda
+      title: Editar Venda
       update: Atualizar

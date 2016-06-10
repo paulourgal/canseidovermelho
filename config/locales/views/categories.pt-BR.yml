@@ -3,9 +3,13 @@ pt-BR:
     index:
       destroy: Remover
       edit: Editar
+      name: Nome
       new: Nova Categoria
+      type: Tipo
     new:
+      title: Nova Categoria
       cancel: Cancelar
       create: Cadastrar
     edit:
+      title: Editar Categoria
       update: Atualizar

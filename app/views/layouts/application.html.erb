@@ -23,25 +23,25 @@
         <div class="nav pull-right">
           <ul>
             <li>
-              <%= link_to "Vendas", sales_path %>
+              <%= link_to t('layouts.application.sales'), sales_path %>
             </li>
             <li>
-              <%= link_to "Clientes", clients_path %>
+              <%= link_to t('layouts.application.clients'), clients_path %>
             </li>
             <li>
-              <%= link_to "Estoque", items_path %>
+              <%= link_to t('layouts.application.items'), items_path %>
             </li>
             <li>
-              <%= link_to "Categorias", categories_path %>
+              <%= link_to t('layouts.application.categories'), categories_path %>
             </li>
             <li>
-              <%= link_to "Saídas", outgoings_path %>
+              <%= link_to t('layouts.application.outgoings'), outgoings_path %>
             </li>
             <li>
-              <%= link_to "Entradas", incomings_path %>
+              <%= link_to t('layouts.application.incomings'), incomings_path %>
             </li>
             <li>
-              <%= link_to('Sair', log_out_path, method: :delete) %>
+              <%= link_to t('layouts.application.logout'), log_out_path, method: :delete %>
             </li>
           </ul>
         </div>

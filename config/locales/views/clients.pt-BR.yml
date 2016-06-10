@@ -3,9 +3,14 @@ pt-BR:
     index:
       destroy: Remover
       edit: Editar
+      name: Nome
       new: Novo Cliente
+      status: Situação
+      phone: Telefone
     new:
+      title: Novo Cliente
       cancel: Cancelar
       create: Cadastrar
     edit:
+      title: Editar Cliente
       update: Atualizar

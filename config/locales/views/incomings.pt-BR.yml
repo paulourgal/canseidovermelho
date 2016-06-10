@@ -1,13 +1,16 @@
 pt-BR:
   incomings:
     index:
+      day: Dia
+      category: Categoria
       destroy: Remover
       edit: Editar
       new: Nova Entrada
+      value: Valor
     new:
-      new: Nova Entrada
+      title: Nova Entrada
       cancel: Cancelar
       create: Cadastrar
     edit:
-      edit: Editar Entrada
+      title: Editar Entrada
       update: Atualizar

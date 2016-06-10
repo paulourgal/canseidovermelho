@@ -1,13 +1,16 @@
 pt-BR:
   outgoings:
     index:
+      category: Categoria
+      day: Dia
       destroy: Remover
       edit: Editar
       new: Nova Saída
+      value: Valor
     new:
-      new: Nova Saída
+      title: Nova Saída
       cancel: Cancelar
       create: Cadastrar
     edit:
-      edit: Editar Saída
+      title: Editar Saída
       update: Atualizar

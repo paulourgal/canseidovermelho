@@ -1,6 +1,6 @@
 <div class="form-container">
 
-  <h1 class="form-title"><%= "Editar - #{@client.name}" %></h2>
+  <h1 class="form-title"><%= t('.title') %></h2>
 
   <% flash.each do |name, msg| %>
     <%= content_tag :div, msg, :id => "flash_#{name}" %>

@@ -1,11 +1,17 @@
 pt-BR:
   items:
     index:
+      cost_price: Preço de Custo
       destroy: Remover
       edit: Editar
+      name: Nome
       new: Novo Item
+      sale_price: Preço de Venda
+      status: Situação
     new:
+      title: Novo Item
       cancel: Cancelar
       create: Cadastrar
     edit:
+      title: Editar Item
       update: Atualizar

@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-md-12">
-    <%= link_to "Novo Cliente", new_client_path, class: 'pull-right' %>
+    <%= link_to t('.new'), new_client_path, class: 'pull-right' %>
   </div>
 </div>
 
@@ -12,13 +12,13 @@
       <li class="list-header">
         <div class="row">
           <div class="col-md-3">
-            <%= "Situação" %>
+            <%= t('.status') %>
           </div>
           <div class="col-md-3">
-            <%= "Nome" %>
+            <%= t('.name') %>
           </div>
           <div class="col-md-3">
-            <%= "Telefone" %>
+            <%= t('.phone') %>
           </div>
         </div>
       </li>
