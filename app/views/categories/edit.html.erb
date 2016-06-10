@@ -10,31 +10,7 @@
 
   <%= f.hidden_field :user_id, value: @category.user_id %>
 
-    <div class="row">
-      <div class="col-md-12">
-        <%= f.label :name %>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col-md-12 field">
-        <%= f.text_field :name, class: "form-field", autofocus: true %>
-        <%= render 'shared/error_message', resource: @category, attribute: :name %>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col-md-12">
-        <%= f.label :kind %>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col-md-12 field">
-        <%= f.select :kind, options_for_select(Category::kinds.collect { |k, _| [Category.kind_str(k), k] }, @category.kind), { include_blank: t('helpers.select.prompt') }, { class: 'form-field' } %>
-        <%= render 'shared/error_message', resource: @category, attribute: :kind %>
-      </div>
-    </div>
+    <%= render 'form', f: f %>
 
     <div class="row form-commands">
       <div class="col-md-6">
