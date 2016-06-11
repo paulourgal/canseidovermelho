@@ -1,6 +1,8 @@
-<div class="row">
-  <div class="col-md-12">
-    <%= link_to t('.new'), new_client_path, class: 'pull-right' %>
+<div class="list-new">
+  <div class="row">
+    <div class="col-md-12">
+      <%= link_to t('.new'), new_client_path, class: 'pull-right' %>
+    </div>
   </div>
 </div>
 
@@ -9,36 +11,26 @@
 
     <ul class="list">
 
-      <li class="list-header">
-        <div class="row">
-          <div class="col-md-3">
-            <%= t('.status') %>
-          </div>
-          <div class="col-md-3">
-            <%= t('.name') %>
-          </div>
-          <div class="col-md-3">
-            <%= t('.phone') %>
-          </div>
-        </div>
-      </li>
-
       <% @clients.each do |client| %>
 
-        <li class="list-client">
+        <li class="list-item">
           <div class="row">
-            <div class="col-md-3">
-              <%= Client.status_str(client.status) %>
+            <div class="col-md-5">
+              <h2><%= client.name %></h2>
+              <p><%= "#{client.phone} - #{client.email}" %></p>
+              <p><%= client.address %></p>
             </div>
-            <div class="col-md-3">
-              <%= client.name %>
+            <div class="col-md-5">
+              <h3>Observações</h3>
+              <p><%= client.observations %></p>
             </div>
-            <div class="col-md-3">
-              <%= client.phone %>
-            </div>
-            <div class="col-md-3">
-              <%= link_to t('.edit'), edit_client_path(client), class: 'pull-right' %>
-              <%= link_to t('.destroy'), client_path(client.id), method: :delete, class: 'pull-right' %>
+            <div class="col-md-2">
+              <%= link_to edit_client_path(client), class: 'pull-right margin-r-5' do %>
+                <i class="fa fa-pencil-square-o" title="<%= t('.edit') %>"></i>
+              <% end %>
+              <%= link_to client_path(client.id), method: :delete, class: 'pull-right margin-r-5' do %>
+                <i class="fa fa-trash-o" title="<%= t('.destroy') %>"></i>
+              <% end %>
             </div>
           </div>
         </li>

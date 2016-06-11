@@ -25,6 +25,12 @@ module Canseidovermelho
     config.encoding = "utf-8"
     I18n.config.enforce_available_locales = false
 
+    config.assets.paths << Rails.root.join("vendor", "assets", "fonts")
+    config.assets.precompile << /\.(?:svg|eot|otf|woff|ttf)$/
+    config.assets.precompile += %w(*.png *.jpg *.jpeg *.gif *.svg)
+
+    config.assets.initialize_on_precompile = false
+
     # disabling Coffeescript
     config.generators.javascript_engine :js
 

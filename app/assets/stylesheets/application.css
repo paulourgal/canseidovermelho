@@ -12,6 +12,7 @@
  *
  *= require_self
  *= require bootstrap
+*= require font-awesome
  *= require jquery-ui/datepicker
  *= require base/base
  *= require modules/modules

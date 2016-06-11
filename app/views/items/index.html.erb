@@ -1,6 +1,8 @@
-<div class="row">
-  <div class="col-md-12">
-    <%= link_to t('.new'), new_item_path, class: 'pull-right' %>
+<div class="list-new">
+  <div class="row">
+    <div class="col-md-12">
+      <%= link_to t('.new'), new_item_path, class: 'pull-right' %>
+    </div>
   </div>
 </div>
 
@@ -8,23 +10,6 @@
   <div class="col-md-12">
 
     <ul class="list">
-
-      <li class="list-header">
-        <div class="row">
-          <div class="col-md-2">
-            <%= t('.status') %>
-          </div>
-          <div class="col-md-3">
-            <%= t('.name') %>
-          </div>
-          <div class="col-md-2">
-            <%= t('.cost_price') %>
-          </div>
-          <div class="col-md-2">
-            <%= t('.sale_price') %>
-          </div>
-        </div>
-      </li>
 
       <% @items.each do |item| %>
 
@@ -43,8 +28,12 @@
               <%= "R$#{number_with_precision(item.unitary_price.to_f, precision: 2)}" %>
             </div>
             <div class="col-md-3">
-              <%= link_to t('.edit'), edit_item_path(item), class: 'pull-right' %>
-              <%= link_to t('.destroy'), item_path(item.id), method: :delete, class: 'pull-right' %>
+              <%= link_to edit_item_path(item), class: 'pull-right margin-r-5' do %>
+                <i class="fa fa-pencil-square-o" title="<%= t('.edit') %>"></i>
+              <% end %>
+              <%= link_to item_path(item.id), method: :delete, class: 'pull-right margin-r-5' do %>
+                <i class="fa fa-trash-o" title="<%= t('.destroy') %>"></i>
+              <% end %>
             </div>
           </div>
         </li>

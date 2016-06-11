@@ -1,6 +1,8 @@
-<div class="row">
-  <div class="col-md-12">
-    <%= link_to t('.new'), new_incoming_path, class: 'pull-right' %>
+<div class="list-new">
+  <div class="row">
+    <div class="col-md-12">
+      <%= link_to t('.new'), new_incoming_path, class: 'pull-right' %>
+    </div>
   </div>
 </div>
 
@@ -8,20 +10,6 @@
   <div class="col-md-12">
 
     <ul class="list">
-
-      <li class="list-header">
-        <div class="row">
-          <div class="col-md-3">
-            <%= t('.day') %>
-          </div>
-          <div class="col-md-3">
-            <%= t('.category') %>
-          </div>
-          <div class="col-md-3">
-            <%= t('.value') %>
-          </div>
-        </div>
-      </li>
 
       <% @incomings.each do |incoming| %>
 
@@ -37,8 +25,12 @@
               <%= "R$#{number_with_precision(incoming.value.to_f, precision: 2)}" %>
             </div>
             <div class="col-md-3">
-              <%= link_to t('.edit'), edit_incoming_path(incoming), class: 'pull-right' %>
-              <%= link_to t('.destroy'), incoming_path(incoming.id), method: :delete, class: 'pull-right' %>
+              <%= link_to edit_incoming_path(incoming), class: 'pull-right margin-r-5' do %>
+                <i class="fa fa-pencil-square-o" title="<%= t('.edit') %>"></i>
+              <% end %>
+              <%= link_to incoming_path(incoming.id), method: :delete, class: 'pull-right margin-r-5' do %>
+                <i class="fa fa-trash-o" title="<%= t('.destroy') %>"></i>
+              <% end %>
             </div>
           </div>
         </li>

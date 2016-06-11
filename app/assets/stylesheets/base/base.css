@@ -17,3 +17,10 @@ body {
 .logo .red {
   color: red;
 }
+
+
+/* Margings */
+
+.margin-r-5 {
+  margin-right: 5px;
+}

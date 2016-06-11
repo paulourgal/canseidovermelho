@@ -1,6 +1,8 @@
-<div class="row">
-  <div class="col-md-12">
-    <%= link_to t('.new'), new_sale_path, class: 'pull-right' %>
+<div class="list-new">
+  <div class="row">
+    <div class="col-md-12">
+      <%= link_to t('.new'), new_sale_path, class: 'pull-right' %>
+    </div>
   </div>
 </div>
 
@@ -8,20 +10,6 @@
   <div class="col-md-12">
 
     <ul class="list">
-
-      <li class="list-header">
-        <div class="row">
-          <div class="col-md-3">
-            <%= t('.day') %>
-          </div>
-          <div class="col-md-3">
-            <%= t('.client') %>
-          </div>
-          <div class="col-md-3">
-            <%= t('.total_value') %>
-          </div>
-        </div>
-      </li>
 
       <% @sales.each do |sale| %>
 
@@ -37,8 +25,12 @@
               Valor Total
             </div>
             <div class="col-md-3">
-              <%= link_to t('.edit'), edit_sale_path(sale), class: 'pull-right' %>
-              <%= link_to t('.destroy'), sale_path(sale.id), method: :delete, class: 'pull-right' %>
+              <%= link_to edit_sale_path(sale), class: 'pull-right margin-r-5' do %>
+                <i class="fa fa-pencil-square-o" title="<%= t('.edit') %>"></i>
+              <% end %>
+              <%= link_to sale_path(sale.id), method: :delete, class: 'pull-right margin-r-5' do %>
+                <i class="fa fa-trash-o" title="<%= t('.destroy') %>"></i>
+              <% end %>
             </div>
           </div>
         </li>
