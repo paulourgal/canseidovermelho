@@ -6,11 +6,14 @@ pt-BR:
       destroy: Remover
       edit: Editar
       new: Nova Saída
+      title: Saídas
       value: Valor
     new:
-      title: Nova Saída
       cancel: Cancelar
       create: Cadastrar
+      index: Saídas
+      title: Nova Saída
     edit:
+      index: Saídas
       title: Editar Saída
       update: Atualizar

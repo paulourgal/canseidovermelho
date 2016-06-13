@@ -2,5 +2,6 @@
  *= require modules/error_message
  *= require modules/form
  *= require modules/list
+ *= require modules/breadcrumb
  *= require modules/header
  */

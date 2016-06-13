@@ -1,6 +1,7 @@
 pt-BR:
   layouts:
     application:
+      home: Home
       categories: Categorias
       clients: Clientes
       incomings: Entradas

@@ -8,10 +8,13 @@ pt-BR:
       new: Novo Item
       sale_price: Preço de Venda
       status: Situação
+      title: Estoque
     new:
-      title: Novo Item
       cancel: Cancelar
       create: Cadastrar
+      index: Estoque
+      title: Novo Item
     edit:
+      index: Estoque
       title: Editar Item
       update: Atualizar

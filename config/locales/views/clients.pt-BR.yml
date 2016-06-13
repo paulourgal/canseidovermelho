@@ -7,10 +7,13 @@ pt-BR:
       new: Novo Cliente
       status: Situação
       phone: Telefone
+      title: Clientes
     new:
-      title: Novo Cliente
       cancel: Cancelar
       create: Cadastrar
+      index: Clientes
+      title: Novo Cliente
     edit:
+      index: Clientes
       title: Editar Cliente
       update: Atualizar

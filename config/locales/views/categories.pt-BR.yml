@@ -1,6 +1,7 @@
 pt-BR:
   categories:
     index:
+      title: Categorias
       destroy: Remover
       edit: Editar
       name: Nome
@@ -8,8 +9,10 @@ pt-BR:
       type: Tipo
     new:
       title: Nova Categoria
+      index: Categorias
       cancel: Cancelar
       create: Cadastrar
     edit:
+      index: Categorias
       title: Editar Categoria
       update: Atualizar

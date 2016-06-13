@@ -1,0 +1,29 @@
+.breadcrumb {
+  background-color: transparent;
+  font-size: 12px;
+  padding-left: 15px;
+}
+
+.breadcrumb .active {
+  color: #ccc;
+}
+
+.breadcrumb li a {
+  color: #636363;
+}
+
+.breadcrumb > li {
+  display: inline-block;
+  text-shadow: 0 1px 0 #FFFFFF;
+}
+
+.breadcrumb li:last-child,
+.breadcrumb li a:hover {
+  color: #4FC1EA;
+  text-decoration: none;
+}
+
+.breadcrumb > li + li:before {
+  color: #636363;
+  content: ">\00a0";
+}
