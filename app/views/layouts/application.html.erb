@@ -9,16 +9,16 @@
 </head>
 <body>
 
-<% if current_user %>
-  <header id="header" class="container">
-    <div class="row">
+<header id="header" class="container">
+  <div class="row">
 
-      <div class="col-md-4">
-        <h1 class="logo pull-left">Can$ei do
-          <span class="red">Vermelho<span>
-        </h1>
-      </div>
+    <div class="col-md-4">
+      <h1 class="logo pull-left">Can$ei do
+        <span class="red">Vermelho<span>
+      </h1>
+    </div>
 
+    <% if current_user %>
       <div class="col-md-8">
         <div class="nav pull-right">
           <ul>
@@ -46,10 +46,10 @@
           </ul>
         </div>
       </div>
+    <% end %>
 
-    </div>
-  </header>
-<% end %>
+  </div>
+</header>
 
 <div class="container">
   <%= yield %>

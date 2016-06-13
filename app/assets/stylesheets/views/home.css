@@ -2,20 +2,18 @@
   background-color: #FFFFFF;
   border: 1px solid #CCC;
   box-shadow: 0 0 5px 1px #ccc;
-  left: 50%;
-  margin-left: -250px;
+  margin-top: 20px;
   padding: 20px;
-  position: fixed;
-  top: 20%;
-  width: 500px;
-}
-
-.logo {
-  border-bottom: 1px solid #ccc;
 }
 
 #flash_alert {
   margin-top: 20px;
+}
+
+.login-title {
+  border-bottom: 1px solid #ccc;
+  font-weight: 200;
+  text-align: center
 }
 
 .login-form {
