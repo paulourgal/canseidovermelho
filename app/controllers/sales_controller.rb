@@ -17,7 +17,7 @@ class SalesController < PlatformController
 
   def create
     @sale = Sale.new(sale_params)
-    if @sale.save
+    if SellItems.call(@sale)
       flash.now.notice = "Venda criada com sucesso."
       redirect_to action: :index
     else
@@ -55,7 +55,8 @@ class SalesController < PlatformController
 
   def sale_params
     params.require(:sale).permit(
-      :id, :client_id, :date, :user_id, sale_items_attributes: [:id, :price, :item_id, :_destroy]
+      :id, :client_id, :date, :user_id,
+      sale_items_attributes: [:id, :item_id, :price, :quantity, :_destroy]
     )
   end
 

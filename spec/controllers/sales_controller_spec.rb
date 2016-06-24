@@ -182,6 +182,16 @@ describe SalesController do
         sign_in(@user)
       end
 
+      it 'sends call message to SellItems service' do
+        expect(SellItems).to receive(:call)
+        client = create(:client, user: @user)
+        item = create(:item, user: @user)
+        post :create, sale: {
+          client_id: client, date: Date.today, user_id: @user,
+          sale_items_attributes: { '0' => { price: 10, quantity: 5, item_id: item } }
+        }
+      end
+
       render_views
 
       context 'and success' do
@@ -191,33 +201,16 @@ describe SalesController do
           item = create(:item, user: @user)
           post :create, sale: {
             client_id: client, date: Date.today, user_id: @user,
-            sale_items_attributes: { '0' => { price: 10, item_id: item } }
+            sale_items_attributes: { '0' => { price: 10, quantity: 5, item_id: item } }
           }
           expect(response).to redirect_to(action: :index)
-        end
-
-        it 'creates an Sale' do
-          client = create(:client, user: @user)
-          item = create(:item, user: @user)
-          expect do
-            post :create, sale: {
-              client_id: client, date: Date.today, user_id: @user,
-              sale_items_attributes: { '0' => { price: 10, item_id: item } }
-            }
-          end.to change(Sale, :count).by(1)
         end
 
       end
 
       context 'and fails' do
 
-        it 'does not create an sale' do
-          expect do
-            post :create, sale: { user_id: nil }
-          end.to change(Sale, :count).by(0)
-        end
-
-        it 'render template new when fails' do
+        it 'render template new' do
           post :create, sale: { user_id: nil }
           expect(response).to render_template(:new)
         end

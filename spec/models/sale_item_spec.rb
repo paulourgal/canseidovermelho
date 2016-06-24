@@ -30,6 +30,10 @@ describe SaleItem do
       expect(sale_item).to validate_presence_of(:price)
     end
 
+    it 'presence of quantity' do
+      expect(sale_item).to validate_presence_of(:quantity)
+    end
+
   end
 
 end
